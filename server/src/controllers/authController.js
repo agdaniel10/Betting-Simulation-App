@@ -89,7 +89,8 @@ const loginUser = catchAsync(async (req, res, next) => {
     });
 });
 
-const logoutUser = catchAsync( async (req, res, next) => {
+// Logout User
+const logoutUser = catchAsync(async (req, res, next) => {
     const token = req.headers.authorization?.split(" ")[1]
 
     if (!token) {
@@ -100,14 +101,12 @@ const logoutUser = catchAsync( async (req, res, next) => {
 
     res.status(200).json({
         status: 'success',
-        massage: 'Logged out successfully',
-
+        message: 'Logged out successfully',
     })
-
 })
 
-
-const protect  = catchAsync( async (req, res, next) => {
+// Protect Middleware
+const protect = catchAsync(async (req, res, next) => {
     let token;
 
     if (req.headers.authorization?.startsWith('Bearer')) {
@@ -119,11 +118,11 @@ const protect  = catchAsync( async (req, res, next) => {
     }
 
     if (tokenBlacklist.isBlacklisted(token)) {
-        return next(new AppError("Token has been invalidated. Please log in again, 401"))
+        return next(new AppError("Token has been invalidated. Please log in again", 401))
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET)
-    const user = await User.findById(decoded._id)
+    const user = await User.findById(decoded.id) 
 
     if (!user) {
         return next(new AppError("User no longer exists", 401))
@@ -132,7 +131,5 @@ const protect  = catchAsync( async (req, res, next) => {
     req.user = user;
     next()
 })
-
-
 
 export { registerUser, loginUser, logoutUser, protect };
