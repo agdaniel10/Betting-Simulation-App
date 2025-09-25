@@ -20,7 +20,6 @@ const createToken = (id) => {
 }
 
 // Register User
-// Register User
 const registerUser = catchAsync(async (req, res, next) => {
     const { firstName, lastName, phoneNumber, email, password } = req.body;
 
