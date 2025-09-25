@@ -104,7 +104,7 @@ const verifyEmail = catchAsync(async (req, res, next) => {
 
     const hashedToken = crypto.createHash("sha256").update(verificationCode).digest("hex");
 
-    const user = await User.findOne({ // Added await here
+    const user = await User.findOne({
         email,
         emailVerificationToken: hashedToken,
         emailVerificationExpires: { $gt: Date.now() }
