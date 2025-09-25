@@ -20,6 +20,7 @@ const createToken = (id) => {
 }
 
 // Register User
+// Register User
 const registerUser = catchAsync(async (req, res, next) => {
     const { firstName, lastName, phoneNumber, email, password } = req.body;
 
@@ -37,27 +38,104 @@ const registerUser = catchAsync(async (req, res, next) => {
         return next(new AppError("Phone number already in use", 400));
     }
 
+    const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
+
+    const hashedVerificationCode = crypto.createHash("sha256").update(verificationCode).digest("hex"); // Added .digest("hex")
+
     const newUser = await User.create({
         firstName,
         lastName,
         phoneNumber,
         email,
-        password
+        password,
+        isEmailVerified: false,
+        emailVerificationToken: hashedVerificationCode,
+        emailVerificationExpires: Date.now() + 5 * 60 * 1000
     });
 
-    const token = createToken(newUser._id);
-    
+    const templatePath = path.join(process.cwd(), 'src', 'templates', 'verifyEmail.html');
+    let htmlTemplate = fs.readFileSync(templatePath, 'utf8');
+
+    htmlTemplate = htmlTemplate
+        .replace(/\$\{firstName\}/g, newUser.firstName)  
+        .replace(/\$\{verificationCode\}/g, verificationCode);    
+
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS
+        }
+    });
+
+    // Send email
+    await transporter.sendMail({
+        from: process.env.EMAIL_FROM || "support@betperfect.com",
+        to: newUser.email,                                       
+        subject: "Email Verification Code - betperfect.com",  
+        html: htmlTemplate
+    });
+
     newUser.password = undefined;
 
     res.status(201).json({
         status: 'success',
-        message: 'User registered successfully',
-        token,
+        message: 'Registration successful. Please check your email to verify your account.',
         data: { 
-            user: newUser
+            user: {
+                id: newUser._id,
+                firstName: newUser.firstName,
+                lastName: newUser.lastName,
+                email: newUser.email,
+                isEmailVerified: false
+            }
         }
     });
 });
+
+
+// Verify email 
+const verifyEmail = catchAsync(async (req, res, next) => {
+    const { email, verificationCode } = req.body;
+
+    if(!email || !verificationCode) {
+        return next(new AppError("Email and verification code are required", 400))
+    }
+
+    const hashedToken = crypto.createHash("sha256").update(verificationCode).digest("hex");
+
+    const user = await User.findOne({ // Added await here
+        email,
+        emailVerificationToken: hashedToken,
+        emailVerificationExpires: { $gt: Date.now() }
+    });
+
+    if (!user) {
+        return next(new AppError("Invalid or expired verification code", 400))
+    }
+
+    user.isEmailVerified = true
+    user.emailVerificationToken = undefined
+    user.emailVerificationExpires = undefined
+    await user.save({ validateBeforeSave: false })
+
+    const token = createToken(user._id)
+
+    res.status(200).json({
+        status: 'success',
+        message: 'Email verified successfully',
+        token,
+        data: {
+            user: {
+                id: user._id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                isEmailVerified: true
+            }
+        }
+    });
+})
 
 // login User
 const loginUser = catchAsync(async (req, res, next) => {
@@ -110,16 +188,12 @@ const forgotPassword = catchAsync(async (req, res, next) => {
     const resetCode = Math.floor(10000 + Math.random() * 90000).toString();
 
     user.passwordResetToken = crypto.createHash("sha256").update(resetCode).digest("hex");
-    user.passwordResetExpires = Date.now() + 10 * 60 * 1000;
+    user.passwordResetExpires = Date.now() + 5 * 60 * 1000;
     await user.save({ validateBeforeSave: false});
 
     // Read and customize template
     const templatePath = path.join(process.cwd(), 'src', 'templates', 'resetPasswordEmail.html');
     let htmlTemplate = fs.readFileSync(templatePath, 'utf8');
-
-    // htmlTemplate = htmlTemplate
-    //     .replace('{{firstName}}', user.firstName)
-    //     .replace('{{resetCode}}', resetCode);
 
     htmlTemplate = htmlTemplate
         .replace(/\$\{firstName\}/g, user.firstName)
@@ -128,7 +202,6 @@ const forgotPassword = catchAsync(async (req, res, next) => {
 
     // Create transporter
     const transporter = nodemailer.createTransport({
-
         service: 'gmail',
         auth: {
             user: process.env.EMAIL_USER,
@@ -140,7 +213,7 @@ const forgotPassword = catchAsync(async (req, res, next) => {
     await transporter.sendMail({
         from: process.env.EMAIL_FROM || "support@betperfect.com",
         to: user.email,
-        subject: "Password Reset Code - YourApp",
+        subject: "Password Reset Code - betperfect.com",
         html: htmlTemplate
     });
 
@@ -148,6 +221,53 @@ const forgotPassword = catchAsync(async (req, res, next) => {
         status: "success",
         message: "Reset code sent to email",
     });
+})
+
+// User Resetpassword
+const resetPassword = catchAsync(async (req, res, next) => {
+    const { email, resetCode, newPassword } = req.body;
+
+    if (!email || !resetCode || !newPassword) {
+        return next(new AppError("All fields required", 400));
+    }
+
+    const hashedToken = crypto.createHash("sha256").update(resetCode).digest("hex");
+
+    const user = await User.findOne({
+        email,
+        passwordResetToken: hashedToken,
+        passwordResetExpires: { $gt: Date.now() }
+    }).select("+passwordResetToken, +passwordResetExpires");
+
+
+    if (!user) {
+        return next(new AppError("Invalid or expired reset code", 400))
+    }
+
+    user.password = newPassword;
+
+
+    // Clear reset fields
+    user.passwordResetToken = undefined;
+    user.passwordResetExpires = undefined;
+
+    await user.save();
+
+    const token = createToken(user._id)
+
+    res.status(200).json({
+        status: 'success', 
+        message: 'Password updated successfully',
+        token,
+        data: {
+            user: {
+                id: user._id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email
+            }
+        }
+    })
 })
 
 // Logout User
@@ -195,6 +315,10 @@ const protect = catchAsync(async (req, res, next) => {
     const user = await User.findById(decoded.id).select('+passwordChangedAt')
     if (!user) return next(new AppError('User no longer exists', 401));
 
+    if (!user.isEmailVerified) {
+        return next(new AppError('Please verify your email to access this resource', 403));
+}
+
     if (typeof user.changedPasswordAfter === 'function' && user.changedPasswordAfter(decoded.iat)) {
         return next(new AppError('User recently changed password. Please log in again.', 401));
     }
@@ -204,4 +328,4 @@ const protect = catchAsync(async (req, res, next) => {
     next();
 })
 
-export { registerUser, loginUser, logoutUser, protect, forgotPassword };
+export { registerUser, loginUser, logoutUser, protect, forgotPassword, resetPassword, verifyEmail };
