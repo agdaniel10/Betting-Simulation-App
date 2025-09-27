@@ -1,0 +1,11 @@
+.verifyemail-container p {
+    color:  white;
+}
+
+.otp-input {
+    width: 60px;
+    height: 60px;
+    font-size: 30px;
+    text-align: center;
+    margin: 1px;
+}
