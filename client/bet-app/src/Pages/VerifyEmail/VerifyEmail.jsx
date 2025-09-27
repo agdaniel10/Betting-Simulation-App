@@ -56,10 +56,6 @@ const VerifyEmail = () => {
     console.log(inputArr)
 
     const handleVerifyEmail = async () => {
-        // if (!email) {
-        //     alert("Email not found. Please register again.");
-        //     return;
-        // }
 
         if (inputArr.some(digit => digit === '')) {
             alert("Kindly enter verification code")
@@ -70,7 +66,6 @@ const VerifyEmail = () => {
 
         const verificationCode = inputArr.join('');
         await handleVerifyUser({
-            // email: email,
             verificationCode: verificationCode
         })
     }
