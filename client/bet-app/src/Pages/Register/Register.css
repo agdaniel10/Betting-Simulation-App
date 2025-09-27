@@ -1,5 +1,6 @@
 :root {
     --text-btn-color: #c4b53d;
+    --border-color: #e6382c;
 }
 
 * {
@@ -68,7 +69,7 @@
 }
 
 .form-group input:hover {
-    border: 1px solid #e6382c;
+    border: 1px solid var(--border-color);
 }
 
 .form-group.password {
@@ -117,6 +118,7 @@
 
 .submit-btn:hover {
     background-color: transparent;
+    border: 1px solid var(--border-color);
 }
 
 .register-end-button {

@@ -31,7 +31,6 @@ const Register = () => {
 
   return (
     <>
-    <h1 className='class'></h1>
     <div className='register-main-header'>
       <h1>Bet<span>P</span>erfect.ng</h1>
     </div>

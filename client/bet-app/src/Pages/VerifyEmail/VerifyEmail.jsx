@@ -3,8 +3,9 @@ import { useLocation } from "react-router-dom";
 import { useState, useRef } from "react";
 import './VerifyEmail.css'
 
+12345
 
-const OTP_DIGIT_COUNT= 6
+const OTP_DIGIT_COUNT= 5;
 
 const VerifyEmail = () => {
 
@@ -49,14 +50,19 @@ const VerifyEmail = () => {
 
 
     return (
-        <div className="verifyemail-container">
-            <h1>Bet<span>P</span>erfect.ng</h1>
+        <>
 
-            <h2>Verify your email address</h2>
+        <div className="main-header">
+            <h1>Bet<span>P</span>erfect.ng</h1>
+        </div>
+        
+        <div className="verifyemail-container">
+
+            <h2 className="verifyemail-header">Verify your email address</h2>
 
             <p>
                 A verification code has been sent to the email {email}. 
-                Kindly the code here below...
+                Kindly enter the code below...
             </p>
 
             <div>
@@ -75,12 +81,44 @@ const VerifyEmail = () => {
                 })}
             </div>
 
-            <button>Verify my email</button>
+            <button className="verify-btn">Verify my email</button>
 
-            <button><ion-icon name="logo-twitter"></ion-icon></button>
-            <button><ion-icon name="logo-facebook"></ion-icon></button>
-            <button><ion-icon name="logo-github"></ion-icon></button>
+            <div className="contact-btns">
+                <a 
+                    href="https://www.linkedin.com/in/unogwu-agada-a04638215/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="social-link"
+                >
+                    <button>
+                    <ion-icon name="logo-linkedin"></ion-icon>
+                    </button>
+                </a>
+
+                <a 
+                    href="https://x.com/ag_daniel10" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="social-link"
+                >
+                    <button>
+                    <ion-icon name="logo-twitter"></ion-icon>
+                    </button>
+                </a>
+
+                <a 
+                    href="https://github.com/agdaniel10" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="social-link"
+                >
+                    <button>
+                    <ion-icon name="logo-github"></ion-icon>
+                    </button>
+                </a>    
+            </div>
         </div>
+        </>
     )
 }
 

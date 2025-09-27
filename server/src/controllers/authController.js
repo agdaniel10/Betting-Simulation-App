@@ -37,7 +37,7 @@ const registerUser = catchAsync(async (req, res, next) => {
         return next(new AppError("Phone number already in use", 400));
     }
 
-    const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
+    const verificationCode = Math.floor(10000 + Math.random() * 90000).toString();
 
     const hashedVerificationCode = crypto.createHash("sha256").update(verificationCode).digest("hex"); // Added .digest("hex")
 

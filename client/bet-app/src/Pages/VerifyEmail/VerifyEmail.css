@@ -1,11 +1,106 @@
+:root {
+    --text-btn-color: #c4b53d;
+    --border-color: #e6382c;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.main-header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 0px;
+}
+
+.main-header h1 {
+    display: inline-block;
+    font-size: 100px;
+    color:  white;
+    font-style: italic;
+}
+
+.main-header span {
+    color: #de4b40;
+}
+
+
 .verifyemail-container p {
     color:  white;
 }
 
+.verifyemail-container {
+    border: 1px solid white;
+    border-radius: 4px;
+    background-color: white;
+    background: linear-gradient(135deg, #0f1522 0%, #1a202c 100%);
+    max-width: 60%;
+    width: 100%;
+    height: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.verifyemail-header {
+    font-size: 40px;
+    color: var(--text-btn-color);
+}
 .otp-input {
     width: 60px;
     height: 60px;
     font-size: 30px;
     text-align: center;
     margin: 1px;
+    outline: none;
+    border: none;
+    padding: 10px 15px;
+    color: white;
+    font-family: 'Nunito',sans-serif;
+    background-color: #32363d;
+    outline: none;
+    border: 1px solid white;
+}
+
+.otp-input:focus {
+    border: 1px solid #e6382c;;
+}
+
+.verify-btn {
+    max-width: 600px;
+    width: 100%;
+    cursor: pointer;
+    padding: 20px;
+    color: white;
+    font-size: 17px;
+    background-color: var(--text-btn-color);
+    border: 1px solid white;
+    border-radius: 3px;
+}
+
+.verify-btn:hover {
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+}
+
+.contact-btns {
+    display: flex;
+    gap: 10px;
+}
+
+.contact-btns a button {
+    font-size: 30px;
+    color: white;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.contact-btns button:hover {
+    color: var(--border-color);
 }
