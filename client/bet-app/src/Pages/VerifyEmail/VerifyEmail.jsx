@@ -1,13 +1,20 @@
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useState, useRef } from "react";
+import AuthService from "../../Hooks/useAuth";
 import './VerifyEmail.css'
-
-12345
 
 const OTP_DIGIT_COUNT= 5;
 
 const VerifyEmail = () => {
+
+    const {
+        isLoading,
+        message,
+        error,
+        clearMessages,
+        handleVerifyUser
+    } = AuthService()
 
     const [inputArr, setInputArr] = useState(
         new Array(OTP_DIGIT_COUNT).fill('')
@@ -48,6 +55,34 @@ const VerifyEmail = () => {
     // console.log(email)
     console.log(inputArr)
 
+    const handleVerifyEmail = async () => {
+        // if (!email) {
+        //     alert("Email not found. Please register again.");
+        //     return;
+        // }
+
+        if (inputArr.some(digit => digit === '')) {
+            alert("Kindly enter verification code")
+            return
+        }
+
+        clearMessages()
+
+        const verificationCode = inputArr.join('');
+        await handleVerifyUser({
+            // email: email,
+            verificationCode: verificationCode
+        })
+    }
+
+    const handlePaste = (e) => {
+        e.preventDefault();
+        const pasteData = e.clipboardData.getData('text').slice(0, OTP_DIGIT_COUNT);
+        if (!/^\d+$/.test(pasteData)) return;
+        
+        const newArr = pasteData.split('').concat(new Array(OTP_DIGIT_COUNT).fill(''));
+        setInputArr(newArr.slice(0, OTP_DIGIT_COUNT));
+    };
 
     return (
         <>
@@ -72,6 +107,8 @@ const VerifyEmail = () => {
                             className="otp-input" 
                             key={index} 
                             type="text"
+                            maxLength='1'
+                            onPaste={index === 0 ? handlePaste : undefined}
                             value={inputArr[index]}
                             ref={(input) => (refArr.current[index] = input)}
                             onChange={(e) => handleInputChange(e.target.value, index)}
@@ -81,7 +118,31 @@ const VerifyEmail = () => {
                 })}
             </div>
 
-            <button className="verify-btn">Verify my email</button>
+            {isLoading && (
+                <div className='loading-message'>
+                    <p>Verifying your email</p>
+                </div>
+            )}
+
+            {message && (
+                <div className='success-message'>
+                    <p>{message}</p>
+                </div>
+            )}
+
+            {error && (
+                <div className='error-message'>
+                    <p>{error}</p>
+                </div>
+            )}
+
+            <button 
+                className="verify-btn"
+                onClick={handleVerifyEmail}
+                disabled={isLoading}
+            >
+                {isLoading ? "Verifying email": "Verify my email"}
+            </button>
 
             <div className="contact-btns">
                 <a 

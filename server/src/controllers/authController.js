@@ -95,16 +95,15 @@ const registerUser = catchAsync(async (req, res, next) => {
 
 // Verify email 
 const verifyEmail = catchAsync(async (req, res, next) => {
-    const { email, verificationCode } = req.body;
+    const { verificationCode } = req.body;
 
-    if(!email || !verificationCode) {
+    if(!verificationCode) {
         return next(new AppError("Email and verification code are required", 400))
     }
 
     const hashedToken = crypto.createHash("sha256").update(verificationCode).digest("hex");
 
     const user = await User.findOne({
-        email,
         emailVerificationToken: hashedToken,
         emailVerificationExpires: { $gt: Date.now() }
     });

@@ -20,7 +20,7 @@ const AuthService = () => {
             console.log('Success Message:', message);
 
             // Redirect to verify-email url
-            navigate('/verify-email', {
+            navigate('/verifyemail', {
                 state: { email: formData.email }
             });
 
@@ -34,7 +34,6 @@ const AuthService = () => {
     const handleVerifyUser = async (formData) => {
         try {
             const result = await post('/api/auth/verifyemail', {
-                email: formData.email,
                 verificationCode: formData.verificationCode
             });
 
@@ -84,7 +83,7 @@ const AuthService = () => {
 
             console.log('Reset code sent successfully:', result);
             
-            navigate('/reset-password', {
+            navigate('/resetpassword', {
                 state: { email: formData.email }
             });
 

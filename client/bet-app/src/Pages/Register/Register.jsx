@@ -1,9 +1,17 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom';
 import './Register.css'
+import AuthService from '../../Hooks/useAuth';
 
 const Register = () => {
 
+  const {
+    isLoading,
+    message,
+    error,
+    clearMessages,
+    handleRegister
+  } = AuthService();
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -19,9 +27,22 @@ const Register = () => {
     const {name, value} = e.target;
     setFormData(prev => ({...prev, [name]: value}))
   }
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    return 
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // clear previous messages
+    clearMessages()
+
+    // form validation
+    if (!formData.firstName || !formData.lastName || !formData.phoneNumber || !formData.email || !formData.password) {
+      alert("Please fill in all required fields");
+      return
+    }
+
+    // handle register AuthService
+    await handleRegister(formData)
 
   }
 
@@ -40,9 +61,27 @@ const Register = () => {
         <h1 className='register-header'>Sign Up</h1>
       </div>
 
+      {isLoading && (
+        <div className='loading-message'>
+          <p>Creating your account</p>
+        </div>
+      )}
+
+      {message && (
+        <div className='success-message'>
+          <p>{message}</p>
+        </div>
+      )}
+
+      {error && (
+        <div className='error-message'>
+          <p>{error}</p>
+        </div>
+      )}
+
       <form onSubmit={handleSubmit} className='sign-up-form'>
         <div className="form-group">
-          <label htmlFor="name">First Name *</label>
+          <label htmlFor="firstName">First Name *</label>
           <input
             type="text"
             id="firstName"
@@ -54,7 +93,7 @@ const Register = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="name">Last Name *</label>
+          <label htmlFor="lastName">Last Name *</label>
           <input
             type="text"
             id="lastName"
@@ -66,7 +105,7 @@ const Register = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="name">Phone Number *</label>
+          <label htmlFor="phoneNumber">Phone Number *</label>
           <input
             type="text"
             id="phoneNumber"
@@ -78,7 +117,7 @@ const Register = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="name">Email *</label>
+          <label htmlFor="email">Email *</label>
           <input
             type="text"
             id="email"
@@ -90,7 +129,7 @@ const Register = () => {
         </div>
 
         <div className="form-group password">
-          <label htmlFor="name">Password *</label>
+          <label htmlFor="password">Password *</label>
           <input
             type={click ? 'password' : 'text'}
             id="password"
@@ -102,6 +141,7 @@ const Register = () => {
           />
 
           <button 
+            type='button'
             className='password-btn' 
             onClick={handlePassClick}
           >
@@ -113,7 +153,13 @@ const Register = () => {
           </button>
         </div>
 
-        <button type='submit' className='submit-btn'>Submit</button>
+        <button
+         type='submit' 
+         className='submit-btn'
+         disabled={isLoading}
+        >
+          {isLoading ? 'Creating Account...': 'Submit'}
+        </button>
 
         <div className='register-end-button'>
           <p>already have an account?</p>
