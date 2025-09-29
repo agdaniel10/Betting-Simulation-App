@@ -52,9 +52,6 @@ const VerifyEmail = () => {
 
     const email = location.state?.email;
 
-    // console.log(email)
-    console.log(inputArr)
-
     const handleVerifyEmail = async () => {
 
         if (inputArr.some(digit => digit === '')) {

@@ -37,7 +37,10 @@ const useApi = () => {
                 setMessage(response.data.message || 'Request Successful');
                 return response.data
             } catch(error) {
-                const errorMessage = error.response?.data?.message || error.response?.data?.error || 'Request failed'
+                const errorMessage = 
+                    error.response?.data?.message || 
+                    error.response?.data?.error || 
+                    'Request failed'
                 setError(errorMessage)
                 
                 if (error.response?.status === 401) {

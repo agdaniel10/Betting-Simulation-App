@@ -27,14 +27,22 @@ const registerUser = catchAsync(async (req, res, next) => {
         return next(new AppError("All fields are required", 400));
     }
 
-    const emailExist = await User.findOne({ email });
-    if (emailExist) {
-        return next(new AppError("Email already in use", 400));
-    }
-
     const phoneExist = await User.findOne({ phoneNumber });
     if (phoneExist) {
-        return next(new AppError("Phone number already in use", 400));
+        const isUnverified = !phoneExist.isEmailVerified
+        const expiredCode = phoneExist.emailVerificationExpires < Date.now()
+
+        if (isUnverified && expiredCode) {
+            console.log(`Deleting expired unverified user with phone: ${phoneNumber}`);
+            await User.deleteOne({ phoneNumber })
+        }else {
+            return next(new AppError("Phone number already exists", 400));
+        }
+    }
+
+    const emailExist = await User.findOne({ email });
+    if (emailExist) {
+        return next(new AppError("Email already exists", 400));
     }
 
     const verificationCode = Math.floor(10000 + Math.random() * 90000).toString();
@@ -49,7 +57,7 @@ const registerUser = catchAsync(async (req, res, next) => {
         password,
         isEmailVerified: false,
         emailVerificationToken: hashedVerificationCode,
-        emailVerificationExpires: Date.now() + 5 * 60 * 1000
+        emailVerificationExpires: Date.now() + 1 * 60 * 1000
     });
 
     const templatePath = path.join(process.cwd(), 'src', 'templates', 'verifyEmail.html');
@@ -68,15 +76,20 @@ const registerUser = catchAsync(async (req, res, next) => {
     });
 
     // Send email
-    await transporter.sendMail({
+    try {
+        await transporter.sendMail({
         from: process.env.EMAIL_FROM || "support@betperfect.com",
         to: newUser.email,                                       
         subject: "Email Verification Code - betperfect.com",  
         html: htmlTemplate
     });
+    } catch (err) {
+        return next(new AppError("Failed to send verification email", 500))
+    }
 
     newUser.password = undefined;
-
+    newUser.emailVerificationExpires = undefined
+    newUser.emailVerificationExpires = undefined
     res.status(201).json({
         status: 'success',
         message: 'Registration successful. Please check your email to verify your account.',
@@ -113,15 +126,38 @@ const verifyEmail = catchAsync(async (req, res, next) => {
     }
 
     user.isEmailVerified = true
-    user.emailVerificationToken = undefined
-    user.emailVerificationExpires = undefined
+    // user.emailVerificationToken = undefined
+    // user.emailVerificationExpires = undefined
     await user.save({ validateBeforeSave: false })
 
     const token = createToken(user._id)
 
+    const templatePath = path.join(process.cwd(), 'src', 'templates', 'registerSuccess.html');
+    let htmlTemplate = fs.readFileSync(templatePath, 'utf8');
+
+    htmlTemplate = htmlTemplate
+        .replace(/\$\{firstName\}/g, user.firstName)  
+
+
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS
+        }
+    });
+
+    // Send email
+    await transporter.sendMail({
+        from: process.env.EMAIL_FROM || "support@betperfect.com",
+        to: user.email,                                       
+        subject: "Successful Registration - betperfect.com",  
+        html: htmlTemplate
+    });
+
     res.status(200).json({
         status: 'success',
-        message: 'Email verified successfully',
+        message: 'User successfully registered',
         token,
         data: {
             user: {

@@ -25,7 +25,7 @@ const AuthService = () => {
             });
 
         } catch(err) {
-            console.error('Registration failed:', error);
+            console.log(error)
             console.error('Error during registration:', err.message);
         }
     };

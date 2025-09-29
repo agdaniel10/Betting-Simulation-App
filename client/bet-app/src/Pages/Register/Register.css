@@ -93,6 +93,11 @@
     border: 1px solid white;
 }
 
+.error-display {
+    color:  red;
+    font-size: 15px;
+}
+
 .form-group input:hover {
     border: 1px solid var(--border-color);
 }
@@ -103,6 +108,33 @@
 
 .password-input {
     position: relative;
+}
+
+.password-check, .password-bad {
+  margin-top: 15px;
+  position: absolute;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #51f542;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.password-bad {
+    color: #d43128;
+}
+
+.password-check ion-icon, .password-bad ion-icon {
+    font-size: 20px;
+    pointer-events: none;
 }
 
 .password-btn {
@@ -126,6 +158,11 @@
 .password-btn ion-icon {
     font-size: 20px;
     pointer-events: none;
+}
+
+.password-length {
+    font-size: 10px;
+    color: red;
 }
 
 .submit-btn {

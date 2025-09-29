@@ -50,6 +50,13 @@ const Register = () => {
     setClick(!click)
   }
 
+  // const errorExists = () => {
+  //   console.log("Error from register page ==", error.toLocaleLowerCase.includes("phone") ? true : false)
+  // }
+
+  // errorExists()
+
+  // errorExists()
   return (
     <>
     <div className='register-main-header'>
@@ -73,11 +80,11 @@ const Register = () => {
         </div>
       )}
 
-      {error && (
+      {/* {error && (
         <div className='error-message'>
           <p>{error}</p>
         </div>
-      )}
+      )} */}
 
       <form onSubmit={handleSubmit} className='sign-up-form'>
         <div className="form-group">
@@ -114,6 +121,9 @@ const Register = () => {
             value={formData.phoneNumber}
             onChange={handleChange}
           />
+          {error.toLocaleLowerCase().includes("phone") && (
+            <p className='error-display'>{error}</p>
+          )}
         </div>
 
         <div className="form-group">
@@ -126,6 +136,9 @@ const Register = () => {
             value={formData.email}
             onChange={handleChange}
           />
+          {error.toLocaleLowerCase().includes("email") && (
+            <p className='error-display'>{error}</p>
+          )}
         </div>
 
         <div className="form-group password">
@@ -140,6 +153,11 @@ const Register = () => {
             className='password-input'
           />
 
+          {formData.password.length >= 6 ? (
+            <span className='password-check'><ion-icon name="checkmark-circle-outline"></ion-icon></span>
+          ): formData.password.length > 0 && <span className='password-bad'><ion-icon name="alert-circle-outline"></ion-icon></span>
+        }
+
           <button 
             type='button'
             className='password-btn' 
@@ -152,6 +170,10 @@ const Register = () => {
               )}
           </button>
         </div>
+
+        {formData.password.length > 0 && formData.password.length < 6 && (
+          <p className='password-length'>Password must me be at least 6 characters</p>
+        )}
 
         <button
          type='submit' 
