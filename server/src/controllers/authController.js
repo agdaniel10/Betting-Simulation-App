@@ -57,7 +57,7 @@ const registerUser = catchAsync(async (req, res, next) => {
         password,
         isEmailVerified: false,
         emailVerificationToken: hashedVerificationCode,
-        emailVerificationExpires: Date.now() + 1 * 60 * 1000
+        emailVerificationExpires: Date.now() + 5 * 60 * 1000
     });
 
     const templatePath = path.join(process.cwd(), 'src', 'templates', 'verifyEmail.html');

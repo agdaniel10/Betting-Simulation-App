@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom';
 import './Register.css'
 import AuthService from '../../Hooks/useAuth';
@@ -21,13 +21,24 @@ const Register = () => {
     password: '',
   })
 
+  const [isFilled, setIsFilled] = useState(false)
+
+  useEffect(() => {
+  const allFilled =
+    formData.firstName &&
+    formData.lastName &&
+    formData.phoneNumber &&
+    formData.email &&
+    formData.password;
+  setIsFilled(allFilled);
+}, [formData]);
+
   const [click, setClick] = useState(false)
 
   const handleChange = (e) => {
     const {name, value} = e.target;
     setFormData(prev => ({...prev, [name]: value}))
   }
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,6 +52,11 @@ const Register = () => {
       return
     }
 
+    if (formData.firstName && formData.lastName && formData.phoneNumber && formData.email && formData.password) {
+      setIsFilled(!isFilled)
+    }
+
+
     // handle register AuthService
     await handleRegister(formData)
 
@@ -50,13 +66,6 @@ const Register = () => {
     setClick(!click)
   }
 
-  // const errorExists = () => {
-  //   console.log("Error from register page ==", error.toLocaleLowerCase.includes("phone") ? true : false)
-  // }
-
-  // errorExists()
-
-  // errorExists()
   return (
     <>
     <div className='register-main-header'>
@@ -68,23 +77,11 @@ const Register = () => {
         <h1 className='register-header'>Sign Up</h1>
       </div>
 
-      {isLoading && (
-        <div className='loading-message'>
-          <p>Creating your account</p>
-        </div>
-      )}
-
       {message && (
         <div className='success-message'>
           <p>{message}</p>
         </div>
       )}
-
-      {/* {error && (
-        <div className='error-message'>
-          <p>{error}</p>
-        </div>
-      )} */}
 
       <form onSubmit={handleSubmit} className='sign-up-form'>
         <div className="form-group">
@@ -177,10 +174,14 @@ const Register = () => {
 
         <button
          type='submit' 
-         className='submit-btn'
-         disabled={isLoading}
+        //  className='submit-btn'
+         className={isFilled? "submit-btn": "filled"}
+         disabled={isLoading || !isFilled}
         >
-          {isLoading ? 'Creating Account...': 'Submit'}
+          {/* {isLoading ? 'Creating Account...': 'Submit'} */}
+          {isLoading ? (
+            <span className="loader">Creating account...</span>
+          ) : 'Submit'}
         </button>
 
         <div className='register-end-button'>
@@ -192,6 +193,10 @@ const Register = () => {
               Login
             </NavLink>
           </p>
+        </div>
+
+        <div className='termandc'>
+          <p className='term-condition'>By creating an account, you agree to our <span> Terms & Conditions </span> and confirm that you are at least 18 years old or over and all information given is true.</p>
         </div>
       </form>
     </div>

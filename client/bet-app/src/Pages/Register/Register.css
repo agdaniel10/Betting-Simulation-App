@@ -30,8 +30,8 @@
     text-align: center;
 }
 
-.loading-message, .success-message, .error-message {
-  padding: 12px;
+.success-message {
+  padding: 6px;
   margin-bottom: 20px;
   border-radius: 8px;
   text-align: center;
@@ -183,6 +183,37 @@
     border: 1px solid var(--border-color);
 }
 
+.filled {
+    margin-top: 15px;
+    width: 100%;
+    padding: 10px 15px;
+    font-family: 'Nunito', sans-serif;
+    background-color:#e6e8e8;
+    border: 1px solid white;
+    border-radius: 10px;
+    color:#929696;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.loader {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: white; 
+}
+
+.loader::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle fill="%23FF156D" stroke="%23FF156D" stroke-width="15" r="15" cx="40" cy="65"><animate attributeName="cy" calcMode="spline" dur="2" values="65;135;65;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="-.4"></animate></circle><circle fill="%23FF156D" stroke="%23FF156D" stroke-width="15" r="15" cx="100" cy="65"><animate attributeName="cy" calcMode="spline" dur="2" values="65;135;65;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="-.2"></animate></circle><circle fill="%23FF156D" stroke="%23FF156D" stroke-width="15" r="15" cx="160" cy="65"><animate attributeName="cy" calcMode="spline" dur="2" values="65;135;65;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="0"></animate></circle></svg>');
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: white;
+}
+
 .register-end-button {
     margin-top: 10px;
     display: flex;
@@ -204,4 +235,17 @@
     text-decoration: none;
 }
 
+.termandc {
+    margin-top: 1rem;
+}
+
+.term-condition {
+    color: white;
+    font-size: 8px;
+    text-align: center;
+}
+
+.term-condition span {
+    color: #22c55e;
+}
 

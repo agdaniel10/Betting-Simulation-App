@@ -51,6 +51,11 @@
     font-size: 40px;
     color: var(--text-btn-color);
 }
+
+.input-timer {
+    display: flex;
+    gap: 10px;
+}
 .otp-input {
     width: 60px;
     height: 60px;

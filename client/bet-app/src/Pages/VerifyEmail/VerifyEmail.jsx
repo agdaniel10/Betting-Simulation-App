@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { useState, useRef } from "react";
 import AuthService from "../../Hooks/useAuth";
 import './VerifyEmail.css'
+import useCountDown from "../../Hooks/useCountDown";
 
 const OTP_DIGIT_COUNT= 5;
 
@@ -15,6 +16,8 @@ const VerifyEmail = () => {
         clearMessages,
         handleVerifyUser
     } = AuthService()
+
+    const { seconds } = useCountDown(60)
 
     const [inputArr, setInputArr] = useState(
         new Array(OTP_DIGIT_COUNT).fill('')
@@ -92,7 +95,7 @@ const VerifyEmail = () => {
                 Kindly enter the code below...
             </p>
 
-            <div>
+            <div className="input-timer">
                 {inputArr.map((input, index) => {
                     return (
                         <input 
@@ -108,6 +111,10 @@ const VerifyEmail = () => {
                         />
                     )
                 })}
+
+                {seconds > 0 && (
+                    <p>{seconds}</p>
+                )}
             </div>
 
             {isLoading && (
