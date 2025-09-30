@@ -1,0 +1,54 @@
+.Header-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 1px solid #273cb3;
+    padding: 1rem;
+    /* position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000; */
+}
+
+.header-product-name h1 {
+    color: white;
+    font-style: italic;
+    font-size: 40px;
+}
+
+.first-span {
+    color: #de4b40;
+}
+
+.second-span {
+    color: #c4bb10;
+}
+
+.Header-links ul{
+    display: flex;
+    gap: 10px;
+}
+
+.Header-links ul li {
+    list-style: none;
+}
+
+.Header-links ul li a {
+    text-decoration: none;
+    color:  white;
+    font-size: 1rem;
+}
+
+.login-register-container {
+    display: flex;
+    gap: 10px;
+}
+
+.login-btn, .register-btn {
+    padding: 10px;
+    border: 1px solid #273cb3;
+    background-color: transparent;
+    color: white;
+    font-family: "Nunito", sans-serif;
+    cursor: pointer;
+}

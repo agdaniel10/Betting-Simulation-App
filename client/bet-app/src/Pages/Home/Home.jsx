@@ -1,11 +1,12 @@
 import React from "react";
 import './Home.css'
+import Header from "../../Components/Layout/Header/Header";
 
 const Home = () => {
 
     return (
-        <div className="home-container">
-            <p>This is the home page</p>
+        <div>
+            
         </div>
     )
 }

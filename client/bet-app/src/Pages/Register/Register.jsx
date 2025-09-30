@@ -174,11 +174,9 @@ const Register = () => {
 
         <button
          type='submit' 
-        //  className='submit-btn'
          className={isFilled? "submit-btn": "filled"}
          disabled={isLoading || !isFilled}
         >
-          {/* {isLoading ? 'Creating Account...': 'Submit'} */}
           {isLoading ? (
             <span className="loader">Creating account...</span>
           ) : 'Submit'}

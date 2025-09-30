@@ -126,8 +126,6 @@ const verifyEmail = catchAsync(async (req, res, next) => {
     }
 
     user.isEmailVerified = true
-    // user.emailVerificationToken = undefined
-    // user.emailVerificationExpires = undefined
     await user.save({ validateBeforeSave: false })
 
     const token = createToken(user._id)
