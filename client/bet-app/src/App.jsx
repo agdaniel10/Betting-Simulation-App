@@ -11,6 +11,7 @@ import Sports from "./Pages/Sports/Sports";
 import Header from "./Components/Layout/Header/Header";
 import Application from "./Pages/Application/Application";
 import ForgotPassword from "./Pages/ForgetPassword/ForgotPassword";
+import FootabllPage from "./Pages/SportsPages/Football/FootballPage/FootballPage";
 
 function App() {
   return (
@@ -33,6 +34,9 @@ function App() {
 
           {/* Application */}
           <Route path="/application" element={<Application />} />
+
+          {/* {sport pages} */}
+          <Route path="/footballpage" element={<FootabllPage />} />
 
           {/* Catch-all Not Found */}
           <Route path="*" element={<h2>404 - Page Not Found</h2>} />

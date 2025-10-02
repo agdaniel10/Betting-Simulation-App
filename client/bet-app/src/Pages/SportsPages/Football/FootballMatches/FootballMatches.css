@@ -1,23 +1,112 @@
 .football-matches-container {
-    width: 700px;
+    width: 600px;
     border: 1px solid #273cb3;
     margin-top: 5px;
     padding: 1rem;
 }
 
+.main-options-div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.options-div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.options-div-1 {
+    display: flex;
+}
+
+.options-div-2 {
+    display: flex;
+}
+
+.football-matches-container h2 {
+    color: #273cb3;
+}
+
 .main-match-container {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #6faaf2;
+    padding: 1rem;
+}
+
+.main-match-cont-div {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.match-kick-off {
+    color: #273cb3;
+}
+
+.match-id {
+    font-size: 10px;
+    color: #6faaf2;
+}
+
+.match-div p {
+    color: #273cb3;
+}
+
+.odd-main-container {
+    display:  flex;
     gap: 1rem;
 }
 
-.match-id-time p {
-    color: white;
-}
-
-.football-matches-container p {
-    color: white
-}
-
-.odd-container {
+.odd-container-wins {
     display: flex;
+    gap: 1px;
+    border-radius: 5px;
+    overflow-x: hidden;
 }
+
+.odd-container-wins button {
+    padding: 12px;
+    border: none;
+    overflow: hidden;
+    text-align: center;
+    background-color: #273cb3;
+    color: white;
+    font-family:'Nunito', sans-serif;
+    
+}
+
+.odd-container button:hover {
+    background-color: #8ab6eb;
+}
+
+.odd-container-goals {
+    display: flex;
+    gap: 1px;
+    border-radius: 5px;
+    overflow-x: hidden;
+}
+
+.odd-container-goals select {
+    width: 50px;
+    border: none;
+    overflow: hidden;
+    text-align: center;
+    background-color: #273cb3;
+    color: white;
+    font-family:'Nunito', sans-serif;
+}
+
+
+.odd-container-goals button {
+    padding: 12px;
+    border: none;
+    overflow: hidden;
+    text-align: center;
+    background-color: #273cb3;
+    color: white;
+    font-family:'Nunito', sans-serif;
+}
+
+
