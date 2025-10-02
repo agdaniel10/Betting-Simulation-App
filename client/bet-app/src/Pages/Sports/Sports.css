@@ -1,0 +1,13 @@
+.sports-header-stick {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: white; 
+
+}
+
+.sports-container {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}

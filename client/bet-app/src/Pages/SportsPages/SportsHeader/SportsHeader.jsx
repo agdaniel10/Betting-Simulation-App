@@ -5,7 +5,8 @@ import { NavLink } from "react-router-dom";
 const SportsHeader = () => {
 
     const sports = [
-        { id: 'football', label: 'Football', path: '/footballpage', end: true },
+        { id: 'home', label: 'Home', path: '/', end: true },
+        { id: 'football', label: 'Football', path: '/footballpage'},
         { id: 'vfootball', label: 'vFootball', path: '/vfootball'},
         { id: 'basketball', label: 'Basketball', path: '/basketballball'},
         { id: 'tennis', label: 'Tennis', path: '/tennis'},

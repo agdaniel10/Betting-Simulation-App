@@ -8,19 +8,37 @@
 .main-options-div {
     display: flex;
     justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 1px solid #6faaf2;
+}
+
+.match-date p {
+    color:  white;
+    font-size: 20px;
 }
 
 .options-div {
     display: flex;
     justify-content: space-between;
+    gap: 1rem;
+}
+
+.options-div p {
+    color: white;
 }
 
 .options-div-1 {
     display: flex;
+    width: 155px;
+    justify-content: space-around;
+
 }
+
 
 .options-div-2 {
     display: flex;
+    width: 155px;
+    justify-content: space-around;
 }
 
 .football-matches-container h2 {

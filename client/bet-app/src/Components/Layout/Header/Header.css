@@ -4,10 +4,6 @@
     align-items: center;
     border-bottom: 1px solid #273cb3;
     padding: 1rem;
-    /* position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000; */
 }
 
 .header-product-name h1 {
