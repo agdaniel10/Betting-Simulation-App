@@ -1,0 +1,23 @@
+.football-matches-container {
+    width: 700px;
+    border: 1px solid #273cb3;
+    margin-top: 5px;
+    padding: 1rem;
+}
+
+.main-match-container {
+    display: flex;
+    gap: 1rem;
+}
+
+.match-id-time p {
+    color: white;
+}
+
+.football-matches-container p {
+    color: white
+}
+
+.odd-container {
+    display: flex;
+}

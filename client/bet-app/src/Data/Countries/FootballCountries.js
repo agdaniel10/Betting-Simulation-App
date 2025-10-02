@@ -1,0 +1,37 @@
+export const topSoccerLeagueCountries = [
+  "International",
+  "International clubs",
+  "England",
+  "Spain",
+  "Germany",
+  "Italy",
+  "France",
+  "Portugal",
+  "Netherlands",
+];
+
+export const remainingLeagues = [
+  "Argentina",
+  "Austria",
+  "Belgium",
+  "Brazil",
+  "China",
+  "Croatia",
+  "Czech Republic",
+  "Denmark",
+  "Greece",
+  "Japan",
+  "Mexico",
+  "Norway",
+  "Poland",
+  "Russia",
+  "Saudi Arabia",
+  "Scotland",
+  "South Africa",
+  "South Korea",
+  "Sweden",
+  "Switzerland",
+  "Turkey",
+  "Ukraine",
+  "USA/Canada"
+]

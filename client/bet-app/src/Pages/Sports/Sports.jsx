@@ -1,11 +1,17 @@
 import React from "react";
 import './Sports.css'
+import SportsHeader from "../SportsPages/SportsHeader/SportsHeader";
+import FootabllPage from "../SportsPages/Football/FootballPage/FootballPage";
 
 const Sports = () => {
 
     return (
         <div>
-            <p>Sports page</p>
+            <SportsHeader />
+
+            <div>
+                < FootabllPage />
+            </div>
         </div>
     )
 }

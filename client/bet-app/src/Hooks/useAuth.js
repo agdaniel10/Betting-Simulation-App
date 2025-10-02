@@ -58,15 +58,8 @@ const AuthService = () => {
             });
 
             console.log('Login successful:', result);
-            
-            // Handle successful login - set auth data here
-            setAuthData({
-                user: result.data.user,
-                token: result.token,
-                isAuthenticated: true
-            });
 
-            navigate('/home');
+            navigate('/');
 
         } catch(err) {
             console.error('Login failed:', error);

@@ -1,15 +1,16 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Register from './Pages/Register/Register';
-import './App.css';
-import Home from './Pages/Home/Home';
-import Login from './Pages/Login/Login';
-import VerifyEmail from './Pages/VerifyEmail/VerifyEmail';
-import Promotions from './Pages/Promotions/Promotions';
-import Blog from './Pages/Blog/Blog';
-import Results from './Pages/Results/Results';
-import Sports from './Pages/Sports/Sports';
-import Header from './Components/Layout/Header/Header';
-import Application from './Pages/Application/Application';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Register from "./Pages/Register/Register";
+import "./App.css";
+import Home from "./Pages/Home/Home";
+import Login from "./Pages/Login/Login";
+import VerifyEmail from "./Pages/VerifyEmail/VerifyEmail";
+import Promotions from "./Pages/Promotions/Promotions";
+import Blog from "./Pages/Blog/Blog";
+import Results from "./Pages/Results/Results";
+import Sports from "./Pages/Sports/Sports";
+import Header from "./Components/Layout/Header/Header";
+import Application from "./Pages/Application/Application";
+import ForgotPassword from "./Pages/ForgetPassword/ForgotPassword";
 
 function App() {
   return (
@@ -17,15 +18,24 @@ function App() {
       <Header />
       <div className="app-container">
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='sports' element={<Sports />} />
-          <Route path='promotions' element={<Promotions />} />
-          <Route path='blog' element={<Blog />} />
-          <Route path='application' element={<Application />} />
-          <Route path='results' element={<Results />} />
-          <Route path='register' element={<Register />} />
-          <Route path='verifyemail' element={<VerifyEmail />} />
-          <Route path='login' element={<Login />} />
+          {/* Public Routes */}
+          <Route path="/" element={<Home />} />
+          <Route path="/sports" element={<Sports />} />
+          <Route path="/promotions" element={<Promotions />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/results" element={<Results />} />
+
+          {/* Auth Routes */}
+          <Route path="/register" element={<Register />} />
+          <Route path="/verifyemail" element={<VerifyEmail />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/forgotpassword" element={<ForgotPassword />} />
+
+          {/* Application */}
+          <Route path="/application" element={<Application />} />
+
+          {/* Catch-all Not Found */}
+          <Route path="*" element={<h2>404 - Page Not Found</h2>} />
         </Routes>
       </div>
     </Router>

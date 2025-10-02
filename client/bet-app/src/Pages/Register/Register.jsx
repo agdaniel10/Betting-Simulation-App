@@ -52,11 +52,6 @@ const Register = () => {
       return
     }
 
-    if (formData.firstName && formData.lastName && formData.phoneNumber && formData.email && formData.password) {
-      setIsFilled(!isFilled)
-    }
-
-
     // handle register AuthService
     await handleRegister(formData)
 

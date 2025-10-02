@@ -1,3 +1,123 @@
-.login-container p {
+.login-container {
+    max-width: 700px;
+    width: 100%;
+    border: 1px solid #273cb3;
+    display: flex;
+    flex-direction: column;
+    margin:  2rem auto;
+    padding: 2rem;
+    gap: 1rem;
+    position: relative;
+}
+
+.remove-page {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.remove-page button {
+    background-color: transparent;
+    border: none;
     color: white;
 }
+
+.remove-page button ion-icon {
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 30px;
+}
+
+.login-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-header h1 {
+    color: white;
+}
+
+.login-form {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    gap: 1rem;
+}
+
+.form-group-Login label {
+    color:  #c4b53d;
+}
+.form-group-Login input {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    color: white;
+    font-family: 'Nunito',sans-serif;
+    background-color: #32363d;
+    outline: none;
+    border: 1px solid white;
+    margin-top: 5px;
+}
+
+.form-group-Login {
+    position: relative;
+}
+.form-group.password {
+    position: relative;
+}
+
+.password-btn {
+  margin-top: 15px;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.password-btn ion-icon {
+    font-size: 20px;
+    pointer-events: none;
+}
+
+
+.password-input {
+    position: relative;
+}
+
+.password-input {
+    position: relative;
+}
+
+.login-btn {
+    padding: 15px;
+    font-family: 'Nunito',sans-serif;
+}
+
+.forgot-password-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.forgot-password-link a {
+    color: #32a852;
+    text-decoration: none;
+}
+
+.loading-message, .success-message, .error-message {
+    color: white
+}
+

@@ -1,0 +1,41 @@
+.football-sidebar-container {
+    margin-top: 5px;
+    max-width: 200px;
+    width: 100%;
+    border: 1px solid #273cb3;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    padding: 10px;
+}
+
+.football-sidebar-container h3 {
+    color: white;
+}
+
+.top-league-container {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #273cb3;
+    border-bottom: 1px solid #273cb3;
+}
+
+.top-league-span {
+    width: 100%;
+}
+
+.top-league-span a {
+    text-decoration: none;
+    font-size: 15px;
+    color: #3da0d1;
+}
+
+.other-league-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.other-league-span a {
+    text-decoration: none;
+    color: #3da0d1;
+}

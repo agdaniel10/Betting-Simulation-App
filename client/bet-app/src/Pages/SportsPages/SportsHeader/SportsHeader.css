@@ -1,0 +1,27 @@
+.sports-header-container {
+    width: 100%;
+    padding: 1rem;
+    background-color: #273cb3;
+}
+
+.sports-header-container ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+
+}
+
+.sports-header-container ul li {
+    list-style: none;
+}
+
+.sports-header-container ul li a {
+    color:  white;
+    text-decoration: none;
+}
+
+.sports-header-container ul li a:hover {
+    border-bottom: 4px solid #de4b40;
+    font-weight: bold;
+}

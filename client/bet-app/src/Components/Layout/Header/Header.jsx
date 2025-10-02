@@ -40,7 +40,11 @@ const Header = () => {
             </div>
 
             <div className="login-register-container">
-                <button className="login-btn">Login</button>
+                <button 
+                    className="login-btn"
+                >
+                    Login
+                </button>
                 <button className="register-btn">Register</button>
             </div>
         </div>
