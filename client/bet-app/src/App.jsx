@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Register from "./Pages/Register/Register";
 import "./App.css";
 import Home from "./Pages/Home/Home";
@@ -11,7 +11,12 @@ import Sports from "./Pages/Sports/Sports";
 import Header from "./Components/Layout/Header/Header";
 import Application from "./Pages/Application/Application";
 import ForgotPassword from "./Pages/ForgetPassword/ForgotPassword";
-import FootabllPage from "./Pages/SportsPages/Football/FootballPage/FootballPage";
+import FootballPage from "./Pages/SportsPages/Football/FootballPage/FootballPage";
+import BasketballPage from "./Pages/SportsPages/BasketBall/BasketBallPage/BasketBallPage";
+import SportsHome from "./Pages/SportsPages/SportsHome/SportsHome";
+// import BasketballPage from "./Pages/SportsPages/Basketball/BasketballPage";
+// import TennisPage from "./Pages/SportsPages/Tennis/TennisPage";
+// import SportsHome from "./Pages/SportsPages/Home/SportsHome";
 
 function App() {
   return (
@@ -20,8 +25,22 @@ function App() {
       <div className="app-container">
         <Routes>
           {/* Public Routes */}
-          <Route path="/" element={<Home />} />
-          <Route path="/sports" element={<Sports />} />
+          {/* <Route path="/" element={<Home />} /> */}
+          <Route path="/" element={<Navigate to="/sports" replace />} />
+          
+          {/* Sports Routes - Nested */}
+          <Route path="/sports/*" element={<Sports />}>
+            <Route index element={<SportsHome />} />
+            <Route path="football" element={<FootballPage />} />
+            <Route path="basketball" element={<BasketballPage />} />
+            {/* <Route path="tennis" element={<TennisPage />} />
+            <Route path="vfootball" element={<VFootballPage />} />
+            <Route path="ice-hockey" element={<IceHockeyPage />} />
+            <Route path="handball" element={<HandballPage />} />
+            <Route path="baseball" element={<BaseballPage />} />
+            <Route path="american-football" element={<AmericanFootballPage />} /> */}
+          </Route>
+
           <Route path="/promotions" element={<Promotions />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/results" element={<Results />} />
@@ -34,9 +53,6 @@ function App() {
 
           {/* Application */}
           <Route path="/application" element={<Application />} />
-
-          {/* {sport pages} */}
-          <Route path="/footballpage" element={<FootabllPage />} />
 
           {/* Catch-all Not Found */}
           <Route path="*" element={<h2>404 - Page Not Found</h2>} />

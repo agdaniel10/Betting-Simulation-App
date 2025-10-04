@@ -5,16 +5,15 @@ import { NavLink } from "react-router-dom";
 const SportsHeader = () => {
 
     const sports = [
-        { id: 'home', label: 'Home', path: '/', end: true },
-        { id: 'football', label: 'Football', path: '/footballpage'},
-        { id: 'vfootball', label: 'vFootball', path: '/vfootball'},
-        { id: 'basketball', label: 'Basketball', path: '/basketballball'},
-        { id: 'tennis', label: 'Tennis', path: '/tennis'},
-        { id: 'icehockey', label: 'Ice Hockey', path: '/icehockey'},
-        { id: 'handball', label: 'Handball', path: '/handball'},
-        { id: 'baseball', label: 'Baseball', path: '/baseball'},
-        { id: 'americanFootball', label: 'American Football', path: '/americanFootball'},
-        
+        { id: 'home', label: 'Home', path: '/sports', end: true },
+        { id: 'football', label: 'Football', path: '/sports/football'},
+        { id: 'vfootball', label: 'vFootball', path: '/sports/vfootball'},
+        { id: 'basketball', label: 'Basketball', path: '/sports/basketball'},
+        { id: 'tennis', label: 'Tennis', path: '/sports/tennis'},
+        { id: 'icehockey', label: 'Ice Hockey', path: '/sports/ice-hockey'},
+        { id: 'handball', label: 'Handball', path: '/sports/handball'},
+        { id: 'baseball', label: 'Baseball', path: '/sports/baseball'},
+        { id: 'americanFootball', label: 'American Football', path: '/sports/american-football'},
     ]
 
     return (
@@ -31,7 +30,6 @@ const SportsHeader = () => {
                     </li>
                 ))}
             </ul>
-
         </div>
     )
 }

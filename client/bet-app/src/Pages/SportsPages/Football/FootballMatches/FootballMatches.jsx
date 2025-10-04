@@ -1,13 +1,13 @@
 import React from "react";
 import './FootballMatches.css'
-import { premierLeague } from "../../../../Data/Countries/EnglishFootball";
 
-const FootballMatches = () => {
+
+const FootballMatches = ({league}) => {
 
 
     return (
         <div className="football-matches-container">
-            <h2>{premierLeague.title}</h2>
+            <h2>{league.title}</h2>
 
             <div className="main-options-div">
                 <div className="match-date">
@@ -31,7 +31,7 @@ const FootballMatches = () => {
                 
             </div>
 
-            {premierLeague.matches.map((match, index) => (
+            {league.matches.map((match, index) => (
 
                 <div key={index} className="main-match-container">
                     <div className="main-match-cont-div">

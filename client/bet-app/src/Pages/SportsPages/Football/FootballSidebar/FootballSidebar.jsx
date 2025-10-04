@@ -1,9 +1,12 @@
 import React from "react";
 import './FootballSidebar.css'
-import { NavLink } from "react-router-dom";
 import { topSoccerLeagueCountries, remainingLeagues } from "../../../../Data/Countries/FootballCountries";
 
-const FootballSidebar = () => {
+const FootballSidebar = ({ onLeagueSelect, selectedLeague }) => {
+    
+    const handleLeagueClick = (leagueName) => {
+        onLeagueSelect(leagueName);
+    };
 
     return (
         <div className="football-sidebar-container">
@@ -11,12 +14,16 @@ const FootballSidebar = () => {
 
             <div className="top-league-container">
                 {topSoccerLeagueCountries.map((league, index) => (
-                    <span key={index} className="top-league-span">
-                        <NavLink
-                            to={''}
+                    <span 
+                        key={index} 
+                        className={`top-league-span ${selectedLeague === league ? 'active' : ''}`}
+                    >
+                        <button
+                            onClick={() => handleLeagueClick(league)}
+                            className="league-button"
                         >
                             {league}
-                        </NavLink>
+                        </button>
                     </span>
                 ))}
             </div>
@@ -25,12 +32,16 @@ const FootballSidebar = () => {
 
             <div className="other-league-container">
                 {remainingLeagues.map((league, index) => (
-                    <span key={index} className="other-league-span">
-                        <NavLink
-                            to={''}
+                    <span 
+                        key={index} 
+                        className={`other-league-span ${selectedLeague === league ? 'active' : ''}`}
+                    >
+                        <button
+                            onClick={() => handleLeagueClick(league)}
+                            className="league-button"
                         >
                             {league}
-                        </NavLink>
+                        </button>
                     </span>
                 ))}
             </div>
