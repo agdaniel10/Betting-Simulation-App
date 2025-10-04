@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useContext }from "react";
 import './BetSlip.css'
+import BetSlipLoad from "./BetSlipLoad/BetSlipLoad";
+import BetSlipFilled from "./BetSlipFilled/BetSlipFilled";
+import { BetslipContext } from "../../../Contexts/BetslipContext/BetslipContext";
 
 const BetSlip = () => {
+
+    const { betSlipCount } = useContext(BetslipContext)
 
     return (
         <div className="betlip-container">
@@ -9,18 +14,12 @@ const BetSlip = () => {
                 <h2>BetSlip</h2>
             </div>
 
-            <div className="betslip-details-container">
-                <p>To place a bet, click on the odds. Or insert a booking code</p>
-
-                <input 
-                    type="text" 
-                    className="code-input"
-                    placeholder="Booking Code"
-                />
-
-                <button className="load-btn">Load</button>
-                <p>A booking code enables one to transfer a betslip between different devices.</p>
+            <div>
+                {betSlipCount === 0 ?
+                <BetSlipLoad /> : <BetSlipFilled />}
             </div>
+
+            
         </div>
     )
 }

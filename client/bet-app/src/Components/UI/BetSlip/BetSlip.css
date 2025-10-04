@@ -17,34 +17,3 @@
 .betlip-container-header h2 {
     color: white;
 }
-
-.betslip-details-container{
-    padding: 15px 10px;
-    display: flex;
-    flex-direction: column;
-    margin: 5px;
-    gap: 5px;
-    background: linear-gradient(135deg, #0a0e1a 0%, #1a1f2e 100%);
-}
-
-.betslip-details-container p {
-    color: white;
-    font-size: 13px;
-}
-
-.code-input {
-    padding: 10px;
-    font-family: "Nunito", sans-serif;
-    outline: none;
-    border: 1px solid #273cb3;
-}
-
-
-.load-btn {
-    padding: 10px;
-    border: none;
-    cursor: pointer;
-    font-family: 'Nunito', sans-serif;
-    background-color: #273cb3;
-    color: white;
-}
