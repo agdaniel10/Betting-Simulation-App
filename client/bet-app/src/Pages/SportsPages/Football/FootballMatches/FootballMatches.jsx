@@ -93,8 +93,17 @@ const FootballMatches = ({league}) => {
                                 <option value="">3.5</option>
                                 <option value="">4.5</option>
                             </select>
-                            <button>{match.odds.over15}</button>
-                            <button>{match.odds.under15}</button>
+                            <button
+                                onClick={() => handleBetClick(match, 'over', match.odds.over15)}
+                            >
+                                {match.odds.over15}
+                            </button>
+
+                            <button
+                                onClick={() => handleBetClick(match, 'under', match.odds.under15)}
+                            >
+                                {match.odds.under15}
+                            </button>
                         </div>
                     </div>
                 </div>

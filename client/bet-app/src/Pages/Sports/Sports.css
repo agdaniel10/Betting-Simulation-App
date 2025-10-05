@@ -14,81 +14,12 @@
 
 .betslip {
   position: sticky;
-  top: 2px;
-  right: 400px;
+  top: 10px;
   align-self: flex-start;
-  height: fit-content;
-  max-height: calc(100vh - 100px);
-  overflow-y: auto;
   width: 300px;
   flex-shrink: 0;
-}
-
-
-/* Make the header sticky */
-/* .sports-header-stick {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background-color: white;
-}
-
-.sports-container-div {
-  min-height: 100vh;
-}
-
-.sports-container {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-}
-
-.betslip {
-  position: sticky;
-  top: 30px;
-  align-self: flex-start;
   height: fit-content;
-} */
- 
-
-/* Make the sports header navigation sticky =========== */
-/* .sports-header-stick {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background-color: #3b5998;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
-
-.sports-container-div {
-  min-height: 100vh;
-  background-color: #1a1a2e;
-}
-
-.sports-container {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  padding: 1rem;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.sports-container > div:first-child {
-  flex: 1;
-  min-width: 0;
-}
-
-.betslip {
-  position: sticky;
-  top: 2px;
-  align-self: flex-start;
-  height: fit-content;
-  max-height: calc(100vh - 100px);
-  overflow-y: auto;
-  width: 300px;
-  flex-shrink: 0;
-} */
 
 @media (max-width: 1024px) {
   .sports-container {

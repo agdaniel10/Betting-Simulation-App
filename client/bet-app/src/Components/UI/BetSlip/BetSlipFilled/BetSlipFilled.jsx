@@ -1,78 +1,52 @@
-import React, { useContext } from 'react';
-import './BetSlipFilled.css';
+import { useContext } from 'react';
+import './BetSlipFilled.css'
 import { BetslipContext } from '../../../../Contexts/BetslipContext/BetslipContext';
 
-const BetSlipFilled = ({ betSlip }) => {
-    const { deleteFromSlip, resetBetSlip } = useContext(BetslipContext);
 
-    // Calculate total odds
-    const totalOdds = betSlip.reduce((total, bet) => {
-        return total * parseFloat(bet.odds);
-    }, 1).toFixed(2);
+const BetSlipFilled = ({betSlip}) => {
 
-    // Calculate potential winnings (example stake of 100)
-    const [stake, setStake] = React.useState(100);
-    const potentialWin = (stake * totalOdds).toFixed(2);
-
-    const getSelectionLabel = (selection) => {
-        switch(selection) {
-            case 'home': return '1';
-            case 'draw': return 'X';
-            case 'away': return '2';
-            default: return selection;
-        }
-    };
+    const {deleteFromSlip, resetBetSlip } = useContext(BetslipContext)
 
     return (
-        <div className="betslip-filled">
-            <div className="betslip-items">
-                {betSlip.map((bet) => (
-                    <div key={bet.matchId} className="bet-item">
-                        <button 
-                            className="remove-bet"
-                            onClick={() => deleteFromSlip(bet.matchId)}
-                        >
-                            ×
-                        </button>
-                        
-                        <div className="bet-match">
-                            <p className="teams">{bet.teams.home} vs {bet.teams.away}</p>
-                            <div className="bet-selection">
-                                <span className="selection-label">
-                                    {getSelectionLabel(bet.selection)}
-                                </span>
-                                <span className="odds">{bet.odds}</span>
+        <div className='betslip-filled-container'>
+            <div>
+                <button
+                    onClick={() => resetBetSlip()}
+                >
+                    Remove All
+                </button>
+
+                <ul>
+                    {betSlip.map((pick) => (
+                        <li key={pick.matchId}>
+                            <div className='pick-container'>
+                                <div className='check-and-delete'>
+                                    <div>
+                                        <p><ion-icon name="checkmark-outline"></ion-icon></p>
+                                        <p>{pick.odds}</p>
+                                    </div>
+
+                                    <button 
+                                        onClick={() => deleteFromSlip(pick.matchId)}
+                                    >
+                                        <ion-icon name="trash-outline"></ion-icon>
+                                    </button>
+                                </div>
+
+                                <div>
+                                    <p>{pick.teams.home} v {pick.teams.away}</p>
+                                </div>
+
+                                <div>
+                                    <p>{pick.selection}: {pick.odds}</p>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                ))}
-            </div>
-
-            <div className="betslip-summary">
-                <div className="stake-input">
-                    <label>Stake:</label>
-                    <input 
-                        type="number" 
-                        value={stake}
-                        onChange={(e) => setStake(e.target.value)}
-                        min="0"
-                    />
-                </div>
-
-                <div className="odds-summary">
-                    <p>Total Odds: <strong>{totalOdds}</strong></p>
-                    <p>Potential Win: <strong>₦{potentialWin}</strong></p>
-                </div>
-
-                <div className="betslip-actions">
-                    <button className="place-bet-btn">Place Bet</button>
-                    <button className="clear-all-btn" onClick={resetBetSlip}>
-                        Clear All
-                    </button>
-                </div>
+                        </li>
+                    ))}
+                </ul>
             </div>
         </div>
-    );
-};
+    )
+}
 
 export default BetSlipFilled;

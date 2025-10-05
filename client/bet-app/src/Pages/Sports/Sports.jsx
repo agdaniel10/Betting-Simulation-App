@@ -1,5 +1,5 @@
 import './Sports.css';
-import { Outlet } from 'react-router-dom'; // Import Outlet
+import { Outlet } from 'react-router-dom';
 import SportsHeader from "../SportsPages/SportsHeader/SportsHeader";
 import BetSlip from "../../Components/UI/BetSlip/BetSlip";
 
@@ -12,7 +12,6 @@ const Sports = () => {
             
             <div className="sports-container">
                 <div>
-                    {/* This is where child routes render */}
                     <Outlet />
                 </div>
                 
