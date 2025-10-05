@@ -1,4 +1,4 @@
-import React, { useContext }from "react";
+import React, { useContext } from "react";
 import './BetSlip.css'
 import BetSlipLoad from "./BetSlipLoad/BetSlipLoad";
 import BetSlipFilled from "./BetSlipFilled/BetSlipFilled";
@@ -6,7 +6,7 @@ import { BetslipContext } from "../../../Contexts/BetslipContext/BetslipContext"
 
 const BetSlip = () => {
 
-    const { betSlipCount } = useContext(BetslipContext)
+    const { betSlip } = useContext(BetslipContext)
 
     return (
         <div className="betlip-container">
@@ -15,11 +15,11 @@ const BetSlip = () => {
             </div>
 
             <div>
-                {betSlipCount === 0 ?
-                <BetSlipLoad /> : <BetSlipFilled />}
+                {betSlip.length > 0 ? 
+                    <BetSlipFilled betSlip={betSlip} /> : 
+                    <BetSlipLoad />
+                }
             </div>
-
-            
         </div>
     )
 }

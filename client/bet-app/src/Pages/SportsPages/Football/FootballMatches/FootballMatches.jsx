@@ -1,8 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 import './FootballMatches.css'
+import { BetslipContext } from "../../../../Contexts/BetslipContext/BetslipContext";
 
 
 const FootballMatches = ({league}) => {
+
+    const { addToBetSlip } = useContext(BetslipContext);
+
+    const handleBetClick = (match, selection, odds) => {
+        const bet = {
+            matchId: match.id,
+            match: match,
+            selection: selection, // 'home', 'draw', or 'away'
+            odds: odds,
+            teams: {
+                home: match.home,  // Fixed: Changed from match.homeTeam
+                away: match.away   // Fixed: Changed from match.awayTeam
+            },
+            timestamp: new Date().toISOString()
+        };
+        
+        addToBetSlip(bet);
+    };
 
 
     return (
@@ -48,9 +67,23 @@ const FootballMatches = ({league}) => {
 
                     <div className="odd-main-container">
                         <div className="odd-container-wins">
-                            <button>{match.odds.homeWin}</button>
-                            <button>{match.odds.draw}</button>
-                            <button>{match.odds.awayWin}</button>
+                            <button
+                                onClick={() => handleBetClick(match, 'home', match.odds.homeWin)}
+                            >
+                                {match.odds.homeWin}
+                            </button>
+
+                            <button
+                                onClick={() => handleBetClick(match, 'draw', match.odds.draw)}
+                            >
+                                {match.odds.draw}
+                            </button>
+
+                            <button
+                                onClick={() => handleBetClick(match, 'away', match.odds.awayWin)}
+                            >
+                                {match.odds.awayWin}
+                            </button>
                         </div>
 
                         <div className="odd-container-goals">

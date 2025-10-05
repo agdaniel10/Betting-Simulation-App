@@ -1,3 +1,9 @@
-.t p{
+.betslip-filled-container {
+    padding: 15px 10px;
+    background: linear-gradient(135deg, #0a0e1a 0%, #1a1f2e 100%);
+    margin: 5px;
+}
+
+.betslip-filled-container p {
     color: white;
 }
