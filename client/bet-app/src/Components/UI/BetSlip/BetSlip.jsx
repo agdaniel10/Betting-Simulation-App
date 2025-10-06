@@ -6,12 +6,17 @@ import { BetslipContext } from "../../../Contexts/BetslipContext/BetslipContext"
 
 const BetSlip = () => {
 
-    const { betSlip } = useContext(BetslipContext)
+    const { betSlip, betSlipCount} = useContext(BetslipContext)
 
     return (
         <div className="betlip-container">
             <div className="betslip-container-header">
                 <h2>BetSlip</h2>
+                {betSlipCount > 0 && (
+                    <div className="bet-count">
+                        {betSlipCount}
+                    </div>
+                )}
             </div>
 
             <div>

@@ -1,10 +1,12 @@
 .betslip-filled-container {
-    padding: 15px 10px;
-    background: linear-gradient(135deg, #0a0e1a 0%, #1a1f2e 100%);
-    margin: 5px;
+    width: 240px;
+    padding: 5px;
     display: flex;
     flex-direction: column;
+    gap: 5px;
+    background: linear-gradient(135deg, #0a0e1a 0%, #1a1f2e 100%);
     height: auto;
+    margin-bottom: 5px;
 }
 
 
@@ -18,11 +20,131 @@
     padding: 0;
     margin: 0;
     list-style: none;
-    overflow: visible; /* Changed from auto */
-    height: auto; /* Let it expand */
+    overflow: visible;
+    height: auto;
+}
+
+.remove-btn-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.remove-btn {
+    border: none;
+    padding: 4px;
+    font-family: 'Nunito', sans-serif;
+    border-radius: 3px;
+    font-size: 10px;
 }
 
 .pick-container {
     word-wrap: break-word;
     overflow-wrap: break-word;
+    border-bottom: 1px solid #a3a5a8;
+    margin-top: 10px;
+}
+
+.pick-container p {
+    color: white;
+}
+
+.check-and-delete {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.check-and-delete button {
+    border: none;
+    color: white;
+    background-color: transparent;
+    font-size: 17px;
+}
+
+.check-tick-selection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.teams p {
+    font-size: 12px;
+}
+
+.odds-display {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.type-number-stake {
+    background: linear-gradient(135deg, #121826 0%, #242b3d 100%);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px;
+}
+
+.type-number-stake p {
+    color: white;
+}
+
+.type, .number, .stake {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.stake-input {
+    max-width: 100px;
+    width: 100%;
+    outline: none;
+    border: 1px solid #273cb3;
+    padding: 4px;
+    font-family: 'Nunito', sans-serif;
+    text-align: end;
+}
+
+.stake-limit {
+    color:#eb5649;
+    font-size: 11px;
+    text-align: center;
+}
+
+.stake-limit ion-icon {
+    color:#eb5649;
+}
+
+.odds-stake-bonus-potential  {
+    padding: 5px;
+    background: linear-gradient(135deg, #121826 0%, #242b3d 100%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.odds-stake-bonus-potential p {
+    color: white;
+}
+
+.total-odds, .total-stake, .max-bonus, .potential {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.place-btn {
+    padding: 12px;
+    font-family: 'Nunito', sans-serif;
+    color: white;
+    background-color: #377ef0;
+    border: none;
+}
+
+.place-btn:hover {
+    background-color: #6991f5;
 }
