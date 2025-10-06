@@ -11,11 +11,11 @@ const FootballMatches = ({league}) => {
         const bet = {
             matchId: match.id,
             match: match,
-            selection: selection, // 'home', 'draw', or 'away'
+            selection: selection,
             odds: odds,
             teams: {
-                home: match.home,  // Fixed: Changed from match.homeTeam
-                away: match.away   // Fixed: Changed from match.awayTeam
+                home: match.home, 
+                away: match.away   
             },
             timestamp: new Date().toISOString()
         };

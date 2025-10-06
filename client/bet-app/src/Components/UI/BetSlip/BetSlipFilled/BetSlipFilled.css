@@ -78,8 +78,12 @@
     align-items: flex-end;
 }
 
-.type-number-stake {
+.main-bets-details {
     background: linear-gradient(135deg, #121826 0%, #242b3d 100%);
+}
+
+.type-number-stake {
+    /* background: linear-gradient(135deg, #121826 0%, #242b3d 100%); */
     margin-top: 10px;
     margin-bottom: 10px;
     display: flex;

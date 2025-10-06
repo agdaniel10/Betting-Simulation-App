@@ -11,8 +11,31 @@ const BetSlipFilled = ({betSlip}) => {
 
     const [stake, setStake] = useState(100)
 
+    const totalOdds = betSlip.reduce((total, bet) => {
+        return total + bet.odds * parseFloat(bet.odds);
+    }, 1).toFixed(2)
+
+    const initialWinning = stake * totalOdds
+    const maxBonus = 0.25 * initialWinning  
+    const potentialWinning = initialWinning + maxBonus
+
     const handleStakeChange = (e) => {
-        setStake(e.target.value)
+        const value = e.target.value
+        
+        if (value === '') {
+            setStake(0)
+            return
+        }
+        
+        const numValue = Number(value)
+        
+        if (isNaN(numValue) || numValue < 0) return
+        if (numValue > MAX_STAKE) {
+            setStake(MAX_STAKE)
+            return
+        }
+        
+        setStake(numValue)
     }
 
     return (
@@ -83,7 +106,7 @@ const BetSlipFilled = ({betSlip}) => {
                         </div>
                     </div>
 
-                    {stake > MAX_STAKE && (
+                    {stake >= MAX_STAKE && (
                             <p className='stake-limit'> <ion-icon name="alert-circle-outline"></ion-icon> Total stake cannot exceed {MAX_STAKE}</p>
                         )}
                 </div>
@@ -91,22 +114,22 @@ const BetSlipFilled = ({betSlip}) => {
                 <div className='odds-stake-bonus-potential'> 
                     <div className='total-odds'>
                         <p>Odds</p>
-                        <p>total odds</p>
+                        <p>{totalOdds}</p>
                     </div>
 
                     <div className='total-stake'>
                         <p>Total Stake</p>
-                        <p>{stake}</p>
+                        <p>{stake.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                     </div>
 
                     <div className='max-bonus'>
                         <p>Max bonus</p>
-                        <p>bonus</p>
+                        <p>{maxBonus.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                     </div>
 
                     <div className='potential'>
                         <p>Potential Win</p>
-                        <p>$34566778</p>
+                        <p>{potentialWinning.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                     </div>
 
                     <button

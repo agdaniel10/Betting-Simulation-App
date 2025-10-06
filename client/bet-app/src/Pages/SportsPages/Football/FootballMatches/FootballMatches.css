@@ -92,10 +92,9 @@
     background-color: #273cb3;
     color: white;
     font-family:'Nunito', sans-serif;
-    
 }
 
-.odd-container button:hover {
+.odd-container-wins button:hover {
     background-color: #8ab6eb;
 }
 
@@ -125,6 +124,10 @@
     background-color: #273cb3;
     color: white;
     font-family:'Nunito', sans-serif;
+}
+
+.odd-container-goals button:hover {
+    background-color: #8ab6eb;;
 }
 
 
