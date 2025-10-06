@@ -152,3 +152,11 @@
 .place-btn:hover {
     background-color: #6991f5;
 }
+
+
+.print-book {
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 5px;
+    font-size: 14px;
+}

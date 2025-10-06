@@ -1,6 +1,8 @@
 import { useContext, useState } from 'react';
 import './BetSlipFilled.css'
 import { BetslipContext } from '../../../../Contexts/BetslipContext/BetslipContext';
+import BookBet from '../../Bookbet/Bookbet';
+import PrintBookedBet from '../../PrintBookedBet/PrintBookedBet';
 
 
 const BetSlipFilled = ({betSlip}) => {
@@ -137,8 +139,14 @@ const BetSlipFilled = ({betSlip}) => {
                     >
                         Place Bet
                     </button>
-                </div>
 
+                    <div className='print-book'>
+                        <BookBet/>
+                        <PrintBookedBet />
+                    </div>
+
+                    <p></p>
+                </div>
 
             </div>
         </div>
