@@ -105,7 +105,7 @@
     overflow-x: hidden;
 }
 
-.odd-container-goals select {
+.odd-container-goals span {
     width: 50px;
     border: none;
     overflow: hidden;
@@ -113,6 +113,9 @@
     background-color: #273cb3;
     color: white;
     font-family:'Nunito', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -130,4 +133,8 @@
     background-color: #8ab6eb;
 }
 
+.turn-blue {
+    background-color:#8caee6 !important;
+    color: white !important;
+}
 

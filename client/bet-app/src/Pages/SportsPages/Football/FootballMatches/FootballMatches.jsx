@@ -5,15 +5,19 @@ import { BetslipContext } from "../../../../Contexts/BetslipContext/BetslipConte
 
 const FootballMatches = ({league}) => {
 
-    const { addToBetSlip } = useContext(BetslipContext);
+    const { betSlip, addToBetSlip } = useContext(BetslipContext);
+
+    const selectedBets = (matchID, selection) => {
+        return betSlip.some((bet) => bet.matchId === matchID && bet.selection === selection);
+    }
 
     // handleBetClick for goals
-    const handleGoalBetClick = (match, goalLine, selection, odds) => {
+    const handleGoalBetClick = (match, selection, odds) => {
         const bet = {
             matchId: match.id,
             match: match,
             betType: 'goals',
-            goalLine: goalLine,
+            goalLine: '1.5',
             selection: selection,
             odds: odds,
             teams: {
@@ -56,7 +60,6 @@ const FootballMatches = ({league}) => {
                     <p>04/10 Friday</p>
                 </div>
 
-
                 <div className="options-div">
                     <div className="options-div-1">
                         <p>1</p>
@@ -92,38 +95,39 @@ const FootballMatches = ({league}) => {
                         <div className="odd-container-wins">
                             <button
                                 onClick={() => handleMatchResultClick(match, 'home', match.odds.homeWin)}
+                                className={selectedBets(match.id, 'home') ? 'turn-blue' : ''}
                             >
                                 {match.odds.homeWin}
                             </button>
 
                             <button
                                 onClick={() => handleMatchResultClick(match, 'draw', match.odds.draw)}
+                                className={selectedBets(match.id, 'draw') ? 'turn-blue' : ''}
                             >
                                 {match.odds.draw}
                             </button>
 
                             <button
                                 onClick={() => handleMatchResultClick(match, 'away', match.odds.awayWin)}
+                                className={selectedBets(match.id, 'away') ? 'turn-blue' : ''}
                             >
                                 {match.odds.awayWin}
                             </button>
                         </div>
 
                         <div className="odd-container-goals">
-                            <select name="" id="">
-                                <option value="">1.5</option>
-                                <option value="">2.5</option>
-                                <option value="">3.5</option>
-                                <option value="">4.5</option>
-                            </select>
+                            <span className="goal-line-label">1.5</span>
+                            
                             <button
-                                onClick={() => handleGoalBetClick(match, 'over', match.odds.over15)}
+                                onClick={() => handleGoalBetClick(match, 'over15', match.odds.over15)}
+                                className={selectedBets(match.id, 'over15') ? 'turn-blue' : ''}
                             >
                                 {match.odds.over15}
                             </button>
 
                             <button
-                                onClick={() => handleGoalBetClick(match, 'under', match.odds.under15)}
+                                onClick={() => handleGoalBetClick(match, 'under15', match.odds.under15)}
+                                className={selectedBets(match.id, 'under15') ? 'turn-blue' : ''}
                             >
                                 {match.odds.under15}
                             </button>
