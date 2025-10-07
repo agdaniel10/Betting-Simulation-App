@@ -7,16 +7,39 @@ const FootballMatches = ({league}) => {
 
     const { addToBetSlip } = useContext(BetslipContext);
 
-    const handleBetClick = (match, selection, odds) => {
+    // handleBetClick for goals
+    const handleGoalBetClick = (match, goalLine, selection, odds) => {
         const bet = {
             matchId: match.id,
             match: match,
+            betType: 'goals',
+            goalLine: goalLine,
             selection: selection,
             odds: odds,
             teams: {
-                home: match.home, 
-                away: match.away   
+                home: match.home,
+                away: match.away
             },
+            kickOff: match.kickOff,
+            timestamp: new Date().toISOString()
+        };
+        
+        addToBetSlip(bet);
+    };
+
+    // handleBetClick for match results
+    const handleMatchResultClick = (match, selection, odds) => {
+        const bet = {
+            matchId: match.id,
+            match: match,
+            betType: 'match_result',
+            selection: selection,
+            odds: odds,
+            teams: {
+                home: match.home,
+                away: match.away
+            },
+            kickOff: match.kickOff,
             timestamp: new Date().toISOString()
         };
         
@@ -68,19 +91,19 @@ const FootballMatches = ({league}) => {
                     <div className="odd-main-container">
                         <div className="odd-container-wins">
                             <button
-                                onClick={() => handleBetClick(match, 'home', match.odds.homeWin)}
+                                onClick={() => handleMatchResultClick(match, 'home', match.odds.homeWin)}
                             >
                                 {match.odds.homeWin}
                             </button>
 
                             <button
-                                onClick={() => handleBetClick(match, 'draw', match.odds.draw)}
+                                onClick={() => handleMatchResultClick(match, 'draw', match.odds.draw)}
                             >
                                 {match.odds.draw}
                             </button>
 
                             <button
-                                onClick={() => handleBetClick(match, 'away', match.odds.awayWin)}
+                                onClick={() => handleMatchResultClick(match, 'away', match.odds.awayWin)}
                             >
                                 {match.odds.awayWin}
                             </button>
@@ -94,13 +117,13 @@ const FootballMatches = ({league}) => {
                                 <option value="">4.5</option>
                             </select>
                             <button
-                                onClick={() => handleBetClick(match, 'over', match.odds.over15)}
+                                onClick={() => handleGoalBetClick(match, 'over', match.odds.over15)}
                             >
                                 {match.odds.over15}
                             </button>
 
                             <button
-                                onClick={() => handleBetClick(match, 'under', match.odds.under15)}
+                                onClick={() => handleGoalBetClick(match, 'under', match.odds.under15)}
                             >
                                 {match.odds.under15}
                             </button>

@@ -37,9 +37,7 @@
 }
 
 
-.booking-code-text {
-    color: red;
-}
+
 @keyframes slideUp {
     from {
         transform: translateY(50px);

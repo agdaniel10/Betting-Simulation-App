@@ -4,8 +4,7 @@ import { useState, useEffect } from 'react';
 
 const BookBetModal = ({ isOpen, onClose }) => {
   const [bookingCode, setBookingCode] = useState('');
-
-  // Generate random 6-digit booking code whenever modal opens
+  
   useEffect(() => {
     if (isOpen) {
       const randomCode = generateBookingCode()

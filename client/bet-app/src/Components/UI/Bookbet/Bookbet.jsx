@@ -6,7 +6,7 @@ const BookBet = () => {
   const [openModal, setOpenModal] = useState(false);
 
   const handleOpenModal = () => {
-    setOpenModal(true); // ✅ this is all you need
+    setOpenModal(true);
   };
 
   return (
@@ -15,7 +15,6 @@ const BookBet = () => {
         Book Bet
       </button>
 
-      {/* ✅ This is where the modal actually renders */}
       <BookBetModal 
         isOpen={openModal}
         onClose={() => setOpenModal(false)}
