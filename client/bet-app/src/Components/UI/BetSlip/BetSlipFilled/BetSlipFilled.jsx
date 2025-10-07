@@ -141,11 +141,13 @@ const BetSlipFilled = ({betSlip}) => {
                     </button>
 
                     <div className='print-book'>
-                        <BookBet/>
+                        <BookBet 
+                            totalOdds={totalOdds}
+                            stake={stake}
+                            potentialWinning={potentialWinning}
+                        />
                         <PrintBookedBet />
                     </div>
-
-                    <p></p>
                 </div>
 
             </div>

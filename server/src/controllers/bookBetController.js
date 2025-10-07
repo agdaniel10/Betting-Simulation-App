@@ -57,3 +57,4 @@ export const loadBookedBet = catchAsync(async (req, res, next) => {
         }
     });
 });
+

@@ -19,7 +19,7 @@ const PORT = process.env.PORT || 5000;
 
 // Routes
 app.use('/api/auth', authRouter)
-app.use('/api/book', bookedbetRouter)
+app.use('/api/bookings', bookedbetRouter)
 
 app.use(errorHandler)
 

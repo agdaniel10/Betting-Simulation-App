@@ -1,21 +1,34 @@
 import { generateBookingCode } from '../../../Utils/generateBookingCode';
 import './BookBetModal.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
-const BookBetModal = ({ isOpen, onClose }) => {
-  const [bookingCode, setBookingCode] = useState('');
-  
-  useEffect(() => {
-    if (isOpen) {
-      const randomCode = generateBookingCode()
-      setBookingCode(randomCode);
-    }
-  }, [isOpen]);
+const BookBetModal = ({ isOpen, onClose, bookingCode }) => {
+
+  const [showCopied, setShowCopied] = useState(false)
+  const timerRef = useRef(null)
 
   if (!isOpen) return null; 
 
   const handleCopy = () => {
     navigator.clipboard.writeText(bookingCode);
+
+    if (timerRef.current) {
+      clearTimeout(timerRef.current)
+    }
+
+    setShowCopied(true)
+
+    timerRef.current = setTimeout(() => {
+      setShowCopied(false)
+    }, 1000)
+
+    useEffect(() => {
+      return () => {
+        if (timerRef.current){
+          clearTimeout(timerRef.current)
+        }
+      }
+    }, [])
   };
 
   return (
@@ -37,6 +50,7 @@ const BookBetModal = ({ isOpen, onClose }) => {
             <button onClick={handleCopy}>
             <ion-icon name="copy-outline"></ion-icon>
             </button>
+            {showCopied && <h4>copied!</h4>}
         </div>
 
         <div className='booking-code-date'>

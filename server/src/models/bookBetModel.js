@@ -17,7 +17,7 @@ const bookedBetSchema = new mongoose.Schema({
         betType: {
             type: String,
             enum: ['match_result', 'goals'], 
-            required: true
+            required: false
         },
         selection: {
             type: String,
