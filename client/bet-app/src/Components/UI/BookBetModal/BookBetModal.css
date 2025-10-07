@@ -1,18 +1,17 @@
-/* BookBetModal.css */
 .modal-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
-    backdrop-filter: blur(8px); /* ✅ This creates the blur effect */
-    -webkit-backdrop-filter: blur(8px); /* Safari support */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999; /* Very high to be above everything */
-    animation: fadeIn 0.2s ease-in;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(1px);        
+  -webkit-backdrop-filter: blur(2px); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeIn 0.2s ease-in;
 }
 
 @keyframes fadeIn {
@@ -27,15 +26,20 @@
 .modal-container {
     background: white;
     padding: 2rem;
-    border-radius: 12px;
+    border-radius: 5px;
     min-width: 350px;
-    max-width: 500px;
+    max-width: 700px;
+    width: 100%;
     position: relative;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
     animation: slideUp 0.3s ease-out;
     z-index: 10000;
 }
 
+
+.booking-code-text {
+    color: red;
+}
 @keyframes slideUp {
     from {
         transform: translateY(50px);
@@ -67,6 +71,16 @@
     transition: background 0.2s;
 }
 
+.booking-code-h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.booking-code-h1 h1 {
+    color: #3b5998;
+}
+
 .booking-code-text {
     color: red;
 }
@@ -82,7 +96,6 @@
     gap: 1rem;
     padding: 1.5rem;
     background: #f8f9fa;
-    border: 2px dashed #3b5998;
     border-radius: 8px;
     margin: 1rem 0;
 }
@@ -108,4 +121,18 @@
 
 .booking-code-box button:hover {
     background: #2d4373;
+}
+
+.booking-date {
+    color: red;
+}
+
+.booking-code-date {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.booking-code-date h5 {
+    color: #3b5998;
 }

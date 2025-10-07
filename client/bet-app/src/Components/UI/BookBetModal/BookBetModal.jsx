@@ -13,7 +13,7 @@ const BookBetModal = ({ isOpen, onClose }) => {
     }
   }, [isOpen]);
 
-  if (!isOpen) return null; // Don't render modal if it's closed
+  if (!isOpen) return null; 
 
   const handleCopy = () => {
     navigator.clipboard.writeText(bookingCode);
@@ -28,16 +28,21 @@ const BookBetModal = ({ isOpen, onClose }) => {
           </button>
         </div>
 
-        <p className='booking-code-text'>Booking Code</p>
-
-        <div className="booking-code-box">
-          <h1>{bookingCode}</h1>
-          <button onClick={handleCopy}>
-            <ion-icon name="copy-outline"></ion-icon>
-          </button>
+        <div className='booking-code-h1'>
+             <h1>Booking Code</h1>
         </div>
 
-        <p>{new Date().toLocaleString()}</p>
+        <div className="booking-code-box">
+            
+            <h1>{bookingCode}</h1>
+            <button onClick={handleCopy}>
+            <ion-icon name="copy-outline"></ion-icon>
+            </button>
+        </div>
+
+        <div className='booking-code-date'>
+            <h5>{new Date().toLocaleString()}</h5>
+        </div>
       </div>
     </div>
   );
