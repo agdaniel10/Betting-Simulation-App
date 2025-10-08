@@ -3,8 +3,9 @@ import './Login.css'
 import { NavLink } from "react-router-dom";
 import AuthService from "../../Hooks/useAuth";
 
-const Login = () => {
+const Login = ({isOpen, onClose}) => {
 
+    if (!isOpen) return null
 
     const {
         isLoading,
@@ -60,77 +61,80 @@ const Login = () => {
     }
 
     return (
-        <div className="login-container">
 
-            <div className="remove-page">
-                <button className="remove-page"><ion-icon name="close-outline"></ion-icon></button>
-            </div>
-            <div className="login-header">
-                <h1>Login</h1>
-            </div>
+        <div className="login-backdrop">
+            <div className="login-container">
 
-                
-                {isLoading && <div className='loading-message'><p>Logging in...</p></div>}
-                {message && <div className='success-message'><p>{message}</p></div>}
-                {error && <div className='error-message'><p>{error}</p></div>}
-
-            <form onSubmit={handleLoginSubmit} className="login-form">
-                <div className="form-group-Login">
-                    <label htmlFor="emailOrPhone">Email or Phone Number</label>
-                    <input 
-                        type="text"
-                        name="emailOrPhone"
-                        placeholder="Enter Email or Phone Number"
-                        disabled={isLoading}
-                        value={formData.emailOrPhone}
-                        onChange={handleChange}
-                    />
+                <div className="remove-page">
+                    <button onClick={onClose} className="remove-page"><ion-icon name="close-outline"></ion-icon></button>
+                </div>
+                <div className="login-header">
+                    <h1>Login</h1>
                 </div>
 
-                <div className="form-group-Login password">
-                    <label htmlFor="password">Password</label>
-                    <input 
-                        type={click ? 'text' : "password"}
-                        id='email or phoneNumber'
-                        placeholder="Password"
-                        name="password"
-                        className="password-input"
-                        value={formData.password}
-                        onChange={handleChange}
-                    />
+                    
+                    {isLoading && <div className='loading-message'><p>Logging in...</p></div>}
+                    {message && <div className='success-message'><p>{message}</p></div>}
+                    {error && <div className='error-message'><p>{error}</p></div>}
 
-                    <button
-                        type="button"
-                        className="password-btn"
-                        onClick={handlePasswordView}
-                    >
-                        {click ? (
-                            <ion-icon name="eye-outline"></ion-icon>
-                        ): (
-                            <ion-icon name="eye-off-outline"></ion-icon>
-                        )}
+                <form onSubmit={handleLoginSubmit} className="login-form">
+                    <div className="form-group-Login">
+                        <label htmlFor="emailOrPhone">Email or Phone Number</label>
+                        <input 
+                            type="text"
+                            name="emailOrPhone"
+                            placeholder="Enter Email or Phone Number"
+                            disabled={isLoading}
+                            value={formData.emailOrPhone}
+                            onChange={handleChange}
+                        />
+                    </div>
 
-                    </button>
-                </div>
+                    <div className="form-group-Login password">
+                        <label htmlFor="password">Password</label>
+                        <input 
+                            type={click ? 'text' : "password"}
+                            id='email or phoneNumber'
+                            placeholder="Password"
+                            name="password"
+                            className="password-input"
+                            value={formData.password}
+                            onChange={handleChange}
+                        />
 
-                <div className="forgot-password-container">
-                    <p className="forgot-password-link">
-                        <NavLink
-                            to={'/forgotpassword'}
+                        <button
+                            type="button"
+                            className="password-btn"
+                            onClick={handlePasswordView}
                         >
-                            Forgot Password? 
-                        </NavLink>
-                    </p>
-                </div>
+                            {click ? (
+                                <ion-icon name="eye-outline"></ion-icon>
+                            ): (
+                                <ion-icon name="eye-off-outline"></ion-icon>
+                            )}
 
-                <button 
-                    type='submit' 
-                    className="login-btn" 
-                    disabled={isLoading}
-                >
-                    Login
-                </button>
-            </form>
+                        </button>
+                    </div>
+
+                    <div className="forgot-password-container">
+                        <p className="forgot-password-link">
+                            <NavLink
+                                to={'/forgotpassword'}
+                            >
+                                Forgot Password? 
+                            </NavLink>
+                        </p>
+                    </div>
+
+                    <button 
+                        type='submit' 
+                        className="login-btn" 
+                        disabled={isLoading}
+                    >
+                        Login
+                    </button>
+                </form>
+            </div>
         </div>
     )
 }

@@ -1,4 +1,3 @@
-import { generateBookingCode } from '../../../Utils/generateBookingCode';
 import './BookBetModal.css';
 import { useState, useEffect, useRef } from 'react';
 
