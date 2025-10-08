@@ -59,6 +59,7 @@
     color: white;
     background-color: transparent;
     font-size: 17px;
+    cursor: pointer;
 }
 
 .check-tick-selection {

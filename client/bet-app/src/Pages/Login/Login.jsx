@@ -63,7 +63,7 @@ const Login = () => {
         <div className="login-container">
 
             <div className="remove-page">
-                <button className="remove-page"><ion-icon name="arrow-forward-outline"></ion-icon></button>
+                <button className="remove-page"><ion-icon name="close-outline"></ion-icon></button>
             </div>
             <div className="login-header">
                 <h1>Login</h1>
