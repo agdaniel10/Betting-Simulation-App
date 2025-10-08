@@ -63,9 +63,6 @@ const Register = () => {
 
   return (
     <>
-    <div className='register-main-header'>
-      <h1>Bet<span>P</span>erfect.ng</h1>
-    </div>
 
     <div className='register-container'>
       <div className='header'>

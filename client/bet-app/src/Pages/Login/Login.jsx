@@ -118,7 +118,7 @@ const Login = () => {
                         <NavLink
                             to={'/forgotpassword'}
                         >
-                            forgot Password? 
+                            Forgot Password? 
                         </NavLink>
                     </p>
                 </div>

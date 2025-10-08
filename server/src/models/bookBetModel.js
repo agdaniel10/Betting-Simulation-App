@@ -17,24 +17,24 @@ const bookedBetSchema = new mongoose.Schema({
         betType: {
             type: String,
             enum: ['match_result', 'goals'], 
-            required: true // Changed to true since you always send it
+            required: true 
         },
         selection: {
             type: String,
             enum: [
-                'home', 'draw', 'away',           // Match results
-                'over15', 'under15'                // Goals (only 1.5 for now)
+                'home', 'draw', 'away',       
+                'over15', 'under15'   
             ],
             required: true
         },
         goalLine: {
             type: String,
             enum: ['1.5', '2.5', '3.5', '4.5'],
-            required: false // Optional since match_result bets don't have this
+            required: false 
         },
         odds: { type: Number, required: true },
         kickOff: String,
-        timestamp: Date // Added to match what you're sending
+        timestamp: Date
     }],
     
     totalOdds: {
@@ -45,7 +45,7 @@ const bookedBetSchema = new mongoose.Schema({
     stake: {
         type: Number,
         default: 0,
-        min: 0 // Can't have negative stake
+        min: 0
     },
     
     potentialWinning: {
@@ -57,16 +57,16 @@ const bookedBetSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: false // Optional for guest bookings
+        required: false
     },
     
     createdAt: { 
         type: Date,
         default: Date.now,
-        expires: 86400 // TTL in seconds (24 hours)
+        expires: 86400 
     }
 }, {
-    timestamps: true // Automatically adds createdAt and updatedAt
+    timestamps: true 
 });
 
 // Index for automatic deletion after 24 hours

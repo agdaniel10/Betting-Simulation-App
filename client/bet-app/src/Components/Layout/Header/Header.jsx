@@ -1,10 +1,13 @@
 import React from "react";
-import { useStat } from "react";
 import { NavLink } from "react-router-dom";
 import './Header.css'
+import LoginButton from "../../UI/LoginButton/LoginButton";
+import { useNavigate } from "react-router-dom";
 
 
 const Header = () => {
+
+    const navigate = useNavigate()
 
 
     const links = [
@@ -14,6 +17,10 @@ const Header = () => {
         { id: 'application', label: 'App', path: '/app'},
         { id: 'results', label: 'Results', path: '/results'},
     ]
+
+    const redirectToRegister = () => {
+        return navigate('/register')
+    }
 
     return (
         <div className="Header-container">
@@ -40,12 +47,13 @@ const Header = () => {
             </div>
 
             <div className="login-register-container">
+                <LoginButton />
                 <button 
-                    className="login-btn"
+                    className="register-btn"
+                    onClick={redirectToRegister }
                 >
-                    Login
+                    Register
                 </button>
-                <button className="register-btn">Register</button>
             </div>
         </div>
     )
