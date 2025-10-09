@@ -72,11 +72,6 @@ const Login = ({isOpen, onClose}) => {
                     <h1>Login</h1>
                 </div>
 
-                    
-                    {isLoading && <div className='loading-message'><p>Logging in...</p></div>}
-                    {message && <div className='success-message'><p>{message}</p></div>}
-                    {error && <div className='error-message'><p>{error}</p></div>}
-
                 <form onSubmit={handleLoginSubmit} className="login-form">
                     <div className="form-group-Login">
                         <label htmlFor="emailOrPhone">Email or Phone Number</label>
@@ -131,8 +126,11 @@ const Login = ({isOpen, onClose}) => {
                         className="login-btn" 
                         disabled={isLoading}
                     >
-                        Login
+                        {isLoading ? 'Loggin in...' : 'Login'}
                     </button>
+
+                    {message && <div className='success-message'><p>{message}</p></div>}
+                    {error && <div className='error-message'><p>{error}</p></div>}
                 </form>
             </div>
         </div>
