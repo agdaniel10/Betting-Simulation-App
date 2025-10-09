@@ -360,4 +360,15 @@ const protect = catchAsync(async (req, res, next) => {
     next();
 })
 
-export { registerUser, loginUser, logoutUser, protect, forgotPassword, resetPassword, verifyEmail };
+// get user details
+const getMe = catchAsync( async (req, res, next) => {
+
+    res.status(200).json({
+        status: 'success', 
+        data: {
+            user: req.user
+        }
+    })
+});
+
+export { registerUser, loginUser, logoutUser, protect, forgotPassword, resetPassword, verifyEmail, getMe };
