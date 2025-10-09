@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Register from "./Pages/Register/Register";
 import "./App.css";
-import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
 import VerifyEmail from "./Pages/VerifyEmail/VerifyEmail";
 import Promotions from "./Pages/Promotions/Promotions";

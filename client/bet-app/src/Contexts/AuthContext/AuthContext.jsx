@@ -18,7 +18,6 @@ export const AuthProvider = ({children}) => {
                 setIsLoading(false);
                 return;
             }
-
             try {
                 const response = await axios.get(
                     `${API_BASE_URL}/api/auth/getMe`,

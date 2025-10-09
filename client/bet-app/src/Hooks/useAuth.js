@@ -1,9 +1,13 @@
 import useApi from "./useApi";
 import { useNavigate } from 'react-router-dom';
+import { useContext } from "react";
+import { AuthContext } from "../Contexts/AuthContext/AuthContext";
 
 const AuthService = () => {
     const { isLoading, message, error, post, clearMessages } = useApi();
     const navigate = useNavigate();
+
+    const { login } = useContext(AuthContext)
 
     // Register User 
     const handleRegister = async (formData) => {
@@ -56,6 +60,9 @@ const AuthService = () => {
                 phoneNumber: formData.phoneNumber,
                 password: formData.password
             });
+
+            const { token, data: { user }} = result.data
+            login(token, user)
 
             console.log('Login successful:', result);
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import './Login.css'
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -64,8 +64,8 @@ const Login = ({isOpen, onClose}) => {
 
         // handle form submission
         await handleUserLogin(loginData)
-
-
+        navigate('/')
+        onclose()
     }
 
     return (

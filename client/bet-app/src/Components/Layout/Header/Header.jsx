@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import './Header.css'
 import LoginButton from "../../UI/LoginButton/LoginButton";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../Contexts/AuthContext/AuthContext";
+import Logout from "../../../Pages/Logout/Logout";
 
 
 const Header = () => {
 
     const navigate = useNavigate()
+
+    const { isAuthenticated, isLoading } = useContext(AuthContext);
+
+    if (isLoading) return null
+
+    console.log(isAuthenticated)
 
 
     const links = [
@@ -47,13 +55,22 @@ const Header = () => {
             </div>
 
             <div className="login-register-container">
-                <LoginButton />
-                <button 
-                    className="register-btn"
-                    onClick={redirectToRegister }
-                >
-                    Register
-                </button>
+                {isAuthenticated ? (
+
+                    <Logout />
+
+                ) : (
+                    
+                    <>
+                        <LoginButton/>
+                        <button
+                            className="register-btn"
+                            onClick={redirectToRegister}
+                        >
+                            Register
+                        </button>
+                    </>
+                )}
             </div>
         </div>
     )
