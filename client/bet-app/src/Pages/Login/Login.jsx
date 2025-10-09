@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import './Login.css'
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AuthService from "../../Hooks/useAuth";
 
 const Login = ({isOpen, onClose}) => {
 
     if (!isOpen) return null
+
+    const navigate = useNavigate()
 
     const {
         isLoading,
@@ -26,6 +29,11 @@ const Login = ({isOpen, onClose}) => {
         setFormData((prev) => ({
             ...prev, [name] : value
         }))
+    }
+
+    const handleSignUpNavigate = () => {
+        onClose()
+        navigate('/register')
     }
 
     const [click, setClick] = useState(false)
@@ -128,6 +136,13 @@ const Login = ({isOpen, onClose}) => {
                     >
                         {isLoading ? 'Loggin in...' : 'Login'}
                     </button>
+
+                    <div className="signup-redirect">
+                        <p>don't have an account?</p>
+                        <button onClick={handleSignUpNavigate}>
+                            Sign Up
+                        </button>
+                    </div>
 
                     {message && <div className='success-message'><p>{message}</p></div>}
                     {error && <div className='error-message'><p>{error}</p></div>}

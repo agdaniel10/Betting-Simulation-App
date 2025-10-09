@@ -133,6 +133,27 @@
     text-decoration: none;
 }
 
+
+.signup-redirect {
+    display:  flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.signup-redirect p {
+    color: white;
+    font-size: 12px;
+}
+
+.signup-redirect button {
+    background-color: transparent;
+    border: none;
+    color: #34eb7a;;
+    cursor: pointer;
+    font-family: 'Nunito';
+
+}
 .success-message{
     font-size: 10px;
     color: #34eb7a;
