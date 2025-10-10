@@ -1,0 +1,12 @@
+.showamount-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.showamount-container p {
+    color: white;
+}
+
+

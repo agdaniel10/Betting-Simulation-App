@@ -60,9 +60,11 @@ const AuthService = () => {
                 phoneNumber: formData.phoneNumber,
                 password: formData.password
             });
-
-            const { token, data: { user }} = result.data
-            login(token, user)
+            
+            if (result?.data) {
+                const { token, data: { user } } = result
+                login(token, user)
+            }
 
             console.log('Login successful:', result);
 

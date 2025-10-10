@@ -5,6 +5,7 @@ import LoginButton from "../../UI/LoginButton/LoginButton";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/AuthContext/AuthContext";
 import Logout from "../../../Pages/Logout/Logout";
+import AccountFund from "../../UI/AccountFund/AccountFund";
 
 
 const Header = () => {
@@ -14,9 +15,6 @@ const Header = () => {
     const { isAuthenticated, isLoading } = useContext(AuthContext);
 
     if (isLoading) return null
-
-    console.log(isAuthenticated)
-
 
     const links = [
         { id: 'sports', label: 'Sports', path: '/sports', end: true },
@@ -57,8 +55,19 @@ const Header = () => {
             <div className="login-register-container">
                 {isAuthenticated ? (
 
-                    <Logout />
+                    <>
 
+                        < AccountFund /> 
+                        <button>
+                            Deposit
+                        </button>
+
+                        <button>
+                            Bet History
+                        </button>
+                        <Logout />
+
+                    </>
                 ) : (
                     
                     <>

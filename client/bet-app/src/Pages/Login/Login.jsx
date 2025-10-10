@@ -65,7 +65,6 @@ const Login = ({isOpen, onClose}) => {
         // handle form submission
         await handleUserLogin(loginData)
         navigate('/')
-        onclose()
     }
 
     return (
