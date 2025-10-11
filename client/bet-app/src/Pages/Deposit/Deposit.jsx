@@ -1,21 +1,14 @@
 import './Deposit.css';
-import { useState, useContext } from 'react';
-import { DepositContext } from '../../Contexts/DepositContext/DepositContext';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faPaypal,
   faCcVisa,
   faCcMastercard,
   faCcAmex,
-  faCcDiscover,
-  faCcStripe,
-  faApplePay,
-  faGooglePay
 } from '@fortawesome/free-brands-svg-icons';
 
 const Deposit = () => {
-
-    const { addDeposit } = useContext(DepositContext);
 
     const [amount, setAmount] = useState('')
 
@@ -34,7 +27,7 @@ const Deposit = () => {
     }
 
     const handleDeposit = () => {
-        addDeposit(amount)
+        
     }
 
     return (
