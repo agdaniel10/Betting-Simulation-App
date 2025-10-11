@@ -28,6 +28,10 @@ const Header = () => {
         return navigate('/register')
     }
 
+    const redirectToDeposit = () => {
+        return navigate('deposit')
+    }
+
     return (
         <div className="Header-container">
             <div className="header-product-name">
@@ -58,7 +62,9 @@ const Header = () => {
                     <>
 
                         < AccountFund /> 
-                        <button>
+                        <button
+                            onClick={redirectToDeposit}
+                        >
                             Deposit
                         </button>
 

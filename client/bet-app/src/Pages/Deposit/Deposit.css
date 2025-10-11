@@ -1,0 +1,105 @@
+.main-deposit-header {
+    padding-left: 10rem;
+    margin-top: 5rem;
+    
+}
+
+.main-deposit-header h1 {
+    color: white;
+    font-size: 50px;
+}
+
+.deposit-input-container {
+    max-width: 800px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 3rem auto;
+    gap: 5px;
+    
+}
+
+.second-title {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #202b47 0%, #323a4b 100%);
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.second-title p {
+    color: white;
+    font-size: 20px;
+}
+
+.container-amount-input {
+    width: 100%;
+    background: linear-gradient(135deg, #202b47 0%, #323a4b 100%);
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    border-radius: 5px;
+}
+
+.container-amount-input p {
+    font-size: 20px;
+    color: white;
+}
+
+.container-amount-input input {
+    padding: 15px;
+    outline: none;
+    font-family: 'Nunito' sans-serif;
+    font-size: 20px;
+    border-radius: 3px;
+}
+
+.container-amount-input button {
+    padding: 15px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 18px;
+    background-color: #4257e3;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+.container-amount-input button:hover {
+    background-color: #7b8aed;
+}
+
+.comming-soon {
+    width: 100%;
+    background: linear-gradient(135deg, #202b47 0%, #323a4b 100%);
+    padding: 40px;
+    gap: 10px;
+    border-radius: 5px;
+}
+
+.comming-soon p {
+    color:  white;
+}
+
+.comming-soon h4 {
+    color: white;
+}
+
+.payment-icons {
+    display: flex;
+    gap: 10px;
+}
+
+.payment-icons svg {
+    margin-top: 20px;
+    background-color: white;
+    width: 100px;
+    padding: 15px;
+    border-radius: 10px;
+}
