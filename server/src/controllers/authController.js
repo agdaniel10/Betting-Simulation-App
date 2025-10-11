@@ -329,6 +329,7 @@ const logoutUser = catchAsync(async (req, res, next) => {
 // Protect Middleware
 const protect = catchAsync(async (req, res, next) => {
     const authHeader = req.headers.authorization || req.cookies?.jwt;
+
     let token;
 
     if (authHeader && authHeader.toLowerCase().startsWith('bearer ')) {
@@ -349,13 +350,13 @@ const protect = catchAsync(async (req, res, next) => {
 
     if (!user.isEmailVerified) {
         return next(new AppError('Please verify your email to access this resource', 403));
-}
+    }
 
     if (typeof user.changedPasswordAfter === 'function' && user.changedPasswordAfter(decoded.iat)) {
         return next(new AppError('User recently changed password. Please log in again.', 401));
     }
-
-    req.user = user.toObject ? user.toObject() : user;
+    
+    req.user = user
     delete req.user.password;
     next();
 })
