@@ -1,0 +1,30 @@
+.sports-bets-container {
+    max-width: 750px;
+    width: 100%;
+    background-color: green;
+}
+
+.sports-bet-header {
+    background: linear-gradient(135deg, #202b47 0%, #323a4b 100%);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sports-bet-header h1 {
+    color:  white;
+}
+
+.category-buttons {
+    display:  flex;
+    gap: 15px;
+}
+
+.category-buttons button {
+    padding: 15px;
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    font-family: 'Nunito', sans-serif;
+}

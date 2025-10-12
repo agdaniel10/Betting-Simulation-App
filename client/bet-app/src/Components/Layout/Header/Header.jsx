@@ -32,6 +32,10 @@ const Header = () => {
         return navigate('deposit')
     }
 
+    const handleBetHistoryredirect = () => {
+        return navigate('/bethistory')
+    }
+
     return (
         <div className="Header-container">
             <div className="header-product-name">
@@ -69,7 +73,10 @@ const Header = () => {
                             Deposit
                         </button>
 
-                        <button className="bethistory-header">
+                        <button 
+                            className="bethistory-header"
+                            onClick={handleBetHistoryredirect}
+                        >
                             Bet History
                         </button>
                         <Logout />

@@ -14,6 +14,7 @@ import FootballPage from "./Pages/SportsPages/Football/FootballPage/FootballPage
 import BasketballPage from "./Pages/SportsPages/BasketBall/BasketBallPage/BasketBallPage";
 import SportsHome from "./Pages/SportsPages/SportsHome/SportsHome";
 import Deposit from "./Pages/Deposit/Deposit";
+import BetHistoryPage from "./Pages/BetHistoryPage/BetHistoryPage";
 // import BasketballPage from "./Pages/SportsPages/Basketball/BasketballPage";
 // import TennisPage from "./Pages/SportsPages/Tennis/TennisPage";
 // import SportsHome from "./Pages/SportsPages/Home/SportsHome";
@@ -54,6 +55,8 @@ function App() {
           {/* Application */}
           <Route path="/application" element={<Application />} />
           <Route path="/deposit" element={<Deposit />} />
+          <Route path="/bethistory" element={<BetHistoryPage/>} />
+
 
           {/* Catch-all Not Found */}
           <Route path="*" element={<h2>404 - Page Not Found</h2>} />

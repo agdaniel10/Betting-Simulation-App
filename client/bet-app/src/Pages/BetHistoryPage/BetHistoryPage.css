@@ -1,0 +1,11 @@
+.bethistory-page-container {
+    display:  flex;
+    justify-content: center;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.history-container {
+    max-width: 750px;
+    width: 100%;
+}
