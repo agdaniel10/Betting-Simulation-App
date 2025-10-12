@@ -48,3 +48,12 @@
     font-family: "Nunito", sans-serif;
     cursor: pointer;
 }
+
+.header-deposit, .bethistory-header {
+    padding: 10px;
+    border: 1px solid #273cb3;
+    background-color: transparent;
+    color: white;
+    font-family: "Nunito", sans-serif;
+    cursor: pointer;
+}

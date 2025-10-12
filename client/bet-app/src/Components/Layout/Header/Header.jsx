@@ -64,11 +64,12 @@ const Header = () => {
                         < AccountFund /> 
                         <button
                             onClick={redirectToDeposit}
+                            className="header-deposit"
                         >
                             Deposit
                         </button>
 
-                        <button>
+                        <button className="bethistory-header">
                             Bet History
                         </button>
                         <Logout />

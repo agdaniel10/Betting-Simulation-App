@@ -1,13 +1,14 @@
 import useApi from "./useApi";
+import useLocalStorage from "./useLocalStorage";
 import { useNavigate } from 'react-router-dom';
-import { useContext } from "react";
 import { AuthContext } from "../Contexts/AuthContext/AuthContext";
+import { useContext } from "react";
 
 const AuthService = () => {
     const { isLoading, message, error, post, clearMessages } = useApi();
-    const navigate = useNavigate();
-
+    const [authData, setAuthData, removeAuthData] = useLocalStorage('betperfect_auth', null);
     const { login } = useContext(AuthContext)
+    const navigate = useNavigate();
 
     // Register User 
     const handleRegister = async (formData) => {
@@ -21,7 +22,6 @@ const AuthService = () => {
             });
 
             console.log('Verification code sent to your email:', result);
-            console.log('Success Message:', message);
 
             // Redirect to verify-email url
             navigate('/verifyemail', {
@@ -29,7 +29,7 @@ const AuthService = () => {
             });
 
         } catch(err) {
-            console.log(error)
+            console.error('Registration failed:', error);
             console.error('Error during registration:', err.message);
         }
     };
@@ -38,11 +38,22 @@ const AuthService = () => {
     const handleVerifyUser = async (formData) => {
         try {
             const result = await post('/api/auth/verifyemail', {
+                email: formData.email,
                 verificationCode: formData.verificationCode
             });
 
             console.log('User verification successful:', result);
-            console.log('Success Message:', message);
+
+            // Save auth data after verification
+            const { token, data } = result;
+            
+            if (token && data?.user) {
+                setAuthData({
+                    token: token,
+                    user: data.user,
+                    isAuthenticated: true
+                });
+            }
 
             navigate('/login');
 
@@ -60,15 +71,26 @@ const AuthService = () => {
                 phoneNumber: formData.phoneNumber,
                 password: formData.password
             });
+
+            console.log('Login result:', result);
+
+            const { token, data } = result;
+
+            login(token, data.user)
             
-            if (result?.data) {
-                const { token, data: { user } } = result
-                login(token, user)
+            if (token && data?.user) {
+                // Save to localStorage
+                setAuthData({
+                    token: token,
+                    user: data.user,
+                    isAuthenticated: true
+                });
+
+                console.log('Token saved successfully');
+                navigate('/');
+            } else {
+                console.error('Invalid response structure:', result);
             }
-
-            console.log('Login successful:', result);
-
-            navigate('/');
 
         } catch(err) {
             console.error('Login failed:', error);
@@ -76,16 +98,29 @@ const AuthService = () => {
         }
     };
 
+    // User logout
+    const handleLogout = async () => {
+        try {
+            await post('/api/auth/logout');
+            removeAuthData(); // Clear localStorage
+            navigate('/login');
+        } catch(err) {
+            // Even if logout fails, clear local data
+            removeAuthData();
+            navigate('/login');
+        }
+    };
+
     // User forgot password
     const handleForgotPassword = async (formData) => {
         try {
-            const result = await post('/api/auth/forgotpassword', { 
+            const result = await post('/api/auth/forgotpassword', {
                 email: formData.email
             });
 
             console.log('Reset code sent successfully:', result);
             
-            navigate('/resetpassword', {
+            navigate('/reset-password', {
                 state: { email: formData.email }
             });
 
@@ -105,6 +140,18 @@ const AuthService = () => {
             });
 
             console.log('Password reset successful:', result);
+            
+            // Optionally auto-login after password reset
+            const { token, data } = result;
+            
+            if (token && data?.user) {
+                setAuthData({
+                    token: token,
+                    user: data.user,
+                    isAuthenticated: true
+                });
+            }
+            
             navigate('/login');
 
         } catch(err) {
@@ -113,15 +160,17 @@ const AuthService = () => {
         }
     };
 
-    
+    // Return all functions and states for use in components
     return {
         isLoading,
         message,
         error,
         clearMessages,
+        authData,
         handleRegister,
         handleVerifyUser,
         handleUserLogin,
+        handleLogout,
         handleForgotPassword,
         handleResetPassword
     };

@@ -31,6 +31,7 @@ const useApi = () => {
 
                 const response = await axios.post(`${API_BASE_URL}${endpoint}`, data, {
                     headers,
+                    withCredentials: true,
                     ...config
                 });
                 

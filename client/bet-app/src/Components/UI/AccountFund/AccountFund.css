@@ -9,4 +9,23 @@
     color: white;
 }
 
+.showamount-btn {
+    outline: none;
+    border: none;
+    color:  white;
+    background-color: transparent;
+    font-size: 20px;
+}
+
+.refreshbtn{
+    background-color: transparent;
+    color: white;
+    outline: none;
+    border: none;
+    font-size: 20px;
+}
+
+
+
+
 

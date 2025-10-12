@@ -1,5 +1,6 @@
 import './Deposit.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import useApi from '../../Hooks/useApi';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faPaypal,
@@ -10,24 +11,64 @@ import {
 
 const Deposit = () => {
 
-    const [amount, setAmount] = useState('')
+    const { isLoading, message, error, post, clearMessages } = useApi()
+    const [showMessage, setShowMessage] = useState(false)
+
+    const [depositAmount, setDepositAmount] = useState('')
 
     const handleAmountChange = (e) => { 
         const value = e.target.value
 
         if (value === '') {
-            setAmount('')
+            setDepositAmount('')
             return
         }
 
         const numValue = Number(value)
         if (isNaN(numValue) || numValue < 0) return 
 
-        setAmount(numValue)
+        setDepositAmount(numValue)
     }
 
-    const handleDeposit = () => {
-        
+    useEffect(() => {
+
+        if (message) {
+            setShowMessage(true)
+        } 
+
+        if (error) {
+            setShowMessage(true)
+        }
+        const messageTimeout = setTimeout(() => {
+            setShowMessage(false)
+        }, 5000);
+
+        return () => clearTimeout(messageTimeout);
+
+    }, [message, error])
+
+
+    const handleDeposit =  async () => {
+
+        clearMessages()
+
+        if (!depositAmount || depositAmount <= 0) {
+            alert('Please enter a valid amount')
+            return
+        }
+
+        try {
+
+            const response = await post('/api/deposit/deposit', {depositAmount})
+
+            if (response.status === 'success') {
+                setDepositAmount('')
+                console.log('Deposit successful', response)
+            }
+
+        }catch (error) {
+            console.error('Deposit failed', error)
+        }
     }
 
     return (
@@ -48,7 +89,7 @@ const Deposit = () => {
                     <p>Amount (NGN)</p>
                     <input 
                         type="number" 
-                        value={amount}
+                        value={depositAmount}
                         className='deposit-input'
                         onChange={(e) => handleAmountChange(e)}
                     />
@@ -57,8 +98,20 @@ const Deposit = () => {
                         onClick={handleDeposit}
                         className='deposit-button'
                     >
-                        Deposit
+                        {isLoading ? 'Depositing...' : 'Deposit'}
                     </button>
+
+                    {error && showMessage &&  (
+                        <div>
+                            <p>{error}</p>
+                        </div>
+                    )}
+
+                    {message && showMessage && (
+                        <div>
+                            <p>{message}</p>
+                        </div>
+                    )}
                 </div>
 
                 <div className='comming-soon'>
