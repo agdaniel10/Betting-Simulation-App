@@ -3,6 +3,7 @@ import './BetSlipFilled.css'
 import { BetslipContext } from '../../../../Contexts/BetslipContext/BetslipContext';
 import BookBet from '../../Bookbet/Bookbet';
 import PrintBookedBet from '../../PrintBookedBet/PrintBookedBet';
+import PlaceBet from '../../PlaceButton/PlaceBet';
 
 
 const BetSlipFilled = ({betSlip}) => {
@@ -134,11 +135,7 @@ const BetSlipFilled = ({betSlip}) => {
                         <p>{potentialWinning.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                     </div>
 
-                    <button
-                        className='place-btn'
-                    >
-                        Place Bet
-                    </button>
+                    <PlaceBet />
 
                     <div className='print-book'>
                         <BookBet 
