@@ -22,8 +22,7 @@ const AuthService = () => {
             });
 
             console.log('Verification code sent to your email:', result);
-
-            // Redirect to verify-email url
+            l
             navigate('/verifyemail', {
                 state: { email: formData.email }
             });
@@ -79,7 +78,6 @@ const AuthService = () => {
             login(token, data.user)
             
             if (token && data?.user) {
-                // Save to localStorage
                 setAuthData({
                     token: token,
                     user: data.user,
@@ -102,7 +100,7 @@ const AuthService = () => {
     const handleLogout = async () => {
         try {
             await post('/api/auth/logout');
-            removeAuthData(); // Clear localStorage
+            removeAuthData();
             navigate('/login');
         } catch(err) {
             // Even if logout fails, clear local data
@@ -141,7 +139,6 @@ const AuthService = () => {
 
             console.log('Password reset successful:', result);
             
-            // Optionally auto-login after password reset
             const { token, data } = result;
             
             if (token && data?.user) {
@@ -160,7 +157,6 @@ const AuthService = () => {
         }
     };
 
-    // Return all functions and states for use in components
     return {
         isLoading,
         message,
