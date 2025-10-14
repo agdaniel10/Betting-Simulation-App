@@ -7,6 +7,7 @@ import errorHandler from './src/middlewares/errorHandler.js';
 import cleanupUnverifiedUsers from './src/utils/cleanUp.js';
 import bookedbetRouter from './src/routes/bookedBetRoutes.js';
 import depositRoute from './src/routes/depositRoute.js';
+import betRoutes from './src/routes/betRoutes.js';
 dotenv.config();
 
 const app = express();
@@ -25,6 +26,7 @@ const PORT = process.env.PORT || 5000;
 app.use('/api/auth', authRouter)
 app.use('/api/bookings', bookedbetRouter)
 app.use('/api/deposit', depositRoute)
+app.use('/api/bet', betRoutes)
 
 app.use(errorHandler)
 

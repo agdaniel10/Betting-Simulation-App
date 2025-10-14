@@ -1,52 +1,69 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
-const betModel = new mongoose.Schema({
-    code: {
-        type: String,
-        unique: true, 
-        required: true,
-    },
-
-    betID: {
-        type: Number,
+const betSchema = new mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         required: true
     },
 
-    bets: {
-        matchId : {type: Number, required: true},
-        teams: {
-            home: String,
-            away: String
-        },
+    betCode: {
+        type: String,
+        unique: true,
+        required: true
+    },
 
-        kickOff: String,
+    // Array of individual bets (for accumulator/multiple bets)
+    bets: [{
+        matchId: {
+            type: String,
+            required: true
+        },
+        teams: {
+            home: { type: String, required: true },
+            away: { type: String, required: true }
+        },
+        kickOff: {
+            type: Date,
+            required: true
+        },
         selection: {
             type: String,
             enum: [
-                'home', 'draw', 'away',       
-                'over15', 'under15'   
+                'home', 'draw', 'away',
+                'over1.5', 'under1.5',
+                'over2.5', 'under2.5',
+                'gg', 'ng'
             ],
             required: true
         },
-
         goalLine: {
             type: String,
-            enum: ['1.5'],
-            required: false 
+            enum: ['1.5', '2.5', '3.5'],
+            required: false
         },
-        odds: { type: Number, required: true },
-        timeStamp: Date
-    },
+        odds: {
+            type: Number,
+            required: true,
+            min: 1.01
+        },
+        result: {
+            type: String,
+            enum: ['pending', 'won', 'lost', 'void'],
+            default: 'pending'
+        }
+    }],
 
     totalOdds: {
         type: Number,
-        required: true
+        required: true,
+        min: 1.01
     },
 
     stake: {
         type: Number,
         required: true,
-        min: 0
+        min: 100
     },
 
     potentialWinning: {
@@ -55,11 +72,37 @@ const betModel = new mongoose.Schema({
         min: 0
     },
 
+    // Overall bet status
+    status: {
+        type: String,
+        enum: ['pending', 'won', 'lost', 'partially_won', 'cancelled'],
+        default: 'pending'
+    },
+    
+    paid: {
+        type: Boolean,
+        default: false
+    },
+
     createdAt: {
         type: Date,
-        default: Date
-    }
-})
+        default: Date.now
+    },
 
-const Bets = mongoose.model('Bets', betModel)
-export default Bets
+    settledAt: {
+        type: Date
+    }
+}, {
+    timestamps: true
+});
+
+// Generate unique bet code before saving
+betSchema.pre('save', async function(next) {
+    if (!this.betCode) {
+        this.betCode = `BET${Date.now()}${Math.random().toString(36).substr(2, 5).toUpperCase()}`;
+    }
+    next();
+});
+
+const Bet = mongoose.model('Bet', betSchema);
+export default Bet;
